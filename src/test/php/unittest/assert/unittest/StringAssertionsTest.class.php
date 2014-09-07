@@ -96,7 +96,7 @@ class StringAssertionsTest extends TypeAssertionsTest {
   public function strings_with_Test_contain_Test($value) {
     $this->assertUnverified(
       ['/Failed to verify that .* contains "Test"/'],
-      Value::of($value)->doesNotContain('Test')
+      Value::of($value)->contains('Test')
     );
   }
 

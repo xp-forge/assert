@@ -9,8 +9,8 @@ class ArrayAssertionsTest extends TypeAssertionsTest {
   /** @return var[][] */
   protected function typeFixtures() {
     return [
-      [[]],
-      [new ArrayList()]
+      [['Fixture']],
+      [new ArrayList('Fixture')]
     ];
   }
 
@@ -23,7 +23,7 @@ class ArrayAssertionsTest extends TypeAssertionsTest {
   public function non_empty_array_does_not_have_a_size_of_0($value) {
     $this->assertUnverified(
       ['/Failed to verify that \[.*\] has a size of 0/ms'],
-      Value::of([])->hasSize(0)
+      Value::of($value)->hasSize(0)
     );
   }
 
@@ -36,7 +36,7 @@ class ArrayAssertionsTest extends TypeAssertionsTest {
   public function non_empty_arrayList_does_not_have_a_size_of_0($value) {
     $this->assertUnverified(
       ['/Failed to verify that lang.types.ArrayList.+ has a size of 0/ms'],
-      Value::of(new ArrayList())->hasSize(0)
+      Value::of(ArrayList::newInstance($value))->hasSize(0)
     );
   }
 
@@ -90,7 +90,7 @@ class ArrayAssertionsTest extends TypeAssertionsTest {
   public function an_array_of_the_fixture_value_contains_the_value_via_doesNotContain($value) {
     $this->assertUnverified(
       ['/Failed to verify that \[.*\] does not contain .*/ms'],
-      Value::of([])->doesNotContain($value)
+      Value::of([$value])->doesNotContain($value)
     );
   }
 
@@ -99,6 +99,44 @@ class ArrayAssertionsTest extends TypeAssertionsTest {
     $this->assertUnverified(
       ['/Failed to verify that lang.types.ArrayList.+ does not contain .*/ms'],
       Value::of(new ArrayList($value))->doesNotContain($value)
+    );
+  }
+
+  #[@test, @values([
+  #  [[1, 2, 3]], [[1]],
+  #  [new ArrayList(1, 2, 3)], [new ArrayList(1)]
+  #])]
+  public function verify_array_starting_with_1($value) {
+    $this->assertVerified(Value::of($value)->startsWith(1));
+  }
+
+  #[@test, @values([
+  #  [[2, 3]], [[]],
+  #  [new ArrayList(2, 3)], [new ArrayList()]
+  #])]
+  public function array_not_starting_with_1($value) {
+    $this->assertUnverified(
+      ['/Failed to verify that .* starts with 1/ms'],
+      Value::of(new ArrayList($value))->startsWith(1)
+    );
+  }
+
+  #[@test, @values([
+  #  [[3, 2, 1]], [[1]],
+  #  [new ArrayList(3, 2, 1)], [new ArrayList(1)]
+  #])]
+  public function verify_array_ending_with_1($value) {
+    $this->assertVerified(Value::of($value)->endsWith(1));
+  }
+
+  #[@test, @values([
+  #  [[3, 2]], [[]],
+  #  [new ArrayList(3, 2)], [new ArrayList()]
+  #])]
+  public function array_not_ending_with_1($value) {
+    $this->assertUnverified(
+      ['/Failed to verify that .* ends with 1/ms'],
+      Value::of(new ArrayList($value))->endsWith(1)
     );
   }
 }

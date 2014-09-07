@@ -20,7 +20,7 @@ abstract class TypeAssertionsTest extends AbstractAssertionsTest {
 
   #[@test, @values('typeFixtures')]
   public function is_not_null($fixture) {
-    $this->assertUnverified(
+    if (null !== $fixture) $this->assertUnverified(
       ['/Failed to verify that .* is null/ms'],
       Value::of($fixture)->isNull()
     );
@@ -28,7 +28,7 @@ abstract class TypeAssertionsTest extends AbstractAssertionsTest {
 
   #[@test, @values('typeFixtures')]
   public function is_not_true($fixture) {
-    $this->assertUnverified(
+    if (true !== $fixture) $this->assertUnverified(
       ['/Failed to verify that .* is true/ms'],
       Value::of($fixture)->isTrue()
     );
@@ -36,7 +36,7 @@ abstract class TypeAssertionsTest extends AbstractAssertionsTest {
 
   #[@test, @values('typeFixtures')]
   public function is_not_false($fixture) {
-    $this->assertUnverified(
+    if (false !== $fixture) $this->assertUnverified(
       ['/Failed to verify that .* is false/ms'],
       Value::of($fixture)->isFalse()
     );

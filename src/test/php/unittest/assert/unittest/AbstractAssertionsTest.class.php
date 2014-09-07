@@ -3,6 +3,7 @@
 use unittest\assert\AssertionsFailed;
 use unittest\AssertionFailedError;
 use unittest\FormattedMessage;
+use util\Objects;
 
 abstract class AbstractAssertionsTest extends \unittest\TestCase {
 
@@ -15,7 +16,14 @@ abstract class AbstractAssertionsTest extends \unittest\TestCase {
    */
   protected function assertUnverified($patterns, $assert) {
     $messages= new AssertionsFailed();
-    foreach ($assert->verify(new AssertionsFailed())->failures() as $i => $failure) {
+    $failures= $assert->verify(new AssertionsFailed())->failures();
+    if (sizeof($failures) !== sizeof($patterns)) {
+      $messages->add(new AssertionFailedError(new FormattedMessage(
+        'Expected %d failures but have %d: %s',
+        [sizeof($patterns), sizeof($failures), Objects::stringOf($failures)]
+      )));
+    }
+    foreach ($failures as $i => $failure) {
       $message= $failure->getMessage();
       if (!preg_match($patterns[$i], $message)) {
         $messages->add(new AssertionFailedError(new FormattedMessage(
@@ -43,12 +51,12 @@ abstract class AbstractAssertionsTest extends \unittest\TestCase {
       [0], [-1], [1],
       [1.0], [0.5],
       [true], [false],
-      [''], ['Fixture'],
+      [''], ['Test'],
       [null], [$this],
       [[]]
     ];
     if ($filter) {
-      return array_filter($fixtures, function($value) use($filter) { return $value !== $filter[0]; });
+      return array_filter($fixtures, function($value) use($filter) { return $value !== $filter; });
     } else {
       return $fixtures;
     }

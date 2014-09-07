@@ -178,7 +178,7 @@ class Value extends \lang\Object {
    * @return self
    */
   public function startsWith($element) {
-    return $this->is(new NotPossible('starts with anythingh'));
+    return $this->is(new NotPossible('starts with anything'));
   }
 
   /**
@@ -188,7 +188,7 @@ class Value extends \lang\Object {
    * @return self
    */
   public function endsWith($element) {
-    return $this->is(new NotPossible('ends with anythingh'));
+    return $this->is(new NotPossible('ends with anything'));
   }
 
   /**

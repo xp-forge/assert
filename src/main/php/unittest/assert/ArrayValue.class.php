@@ -1,5 +1,7 @@
 <?php namespace unittest\assert;
 
+use util\Objects;
+
 class ArrayValue extends Value {
 
   public function hasSize($size) {
@@ -21,5 +23,25 @@ class ArrayValue extends Value {
       '%s does not contain %s',
       '%s contains %s',
     ]));
+  }
+
+  public function startsWith($element) {
+    $rep= Value::stringOf($element);
+    return $this->is(new Match(
+      function($value) use($element) {
+        return $value->length > 0 && Objects::equal($value[0], $element);
+      },
+      ['%s does not start with '.$rep, '%s starts with '.$rep]
+    ));
+  }
+
+  public function endsWith($element) {
+    $rep= Value::stringOf($element);
+    return $this->is(new Match(
+      function($value) use($element) {
+        return $value->length > 0 && Objects::equal($value[$value->length - 1], $element);
+      },
+      ['%s does not end with '.$rep, '%s ends with '.$rep]
+    ));
   }
 }

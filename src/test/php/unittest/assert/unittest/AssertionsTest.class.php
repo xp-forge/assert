@@ -54,7 +54,7 @@ class AssertionsTest extends AbstractAssertionsTest {
   public function is_in_an_array_of_itself_via_isNotIn($value) {
     $this->assertUnverified(
       ['/Failed to verify that .* is not contained in .*/ms'],
-      Value::of($value)->isIn([$value])
+      Value::of($value)->isNotIn([$value])
     );
   }
 

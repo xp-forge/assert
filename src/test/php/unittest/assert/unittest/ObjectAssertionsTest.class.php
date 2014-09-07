@@ -1,12 +1,13 @@
 <?php namespace unittest\assert\unittest;
 
 use unittest\assert\Value;
+use lang\Object;
 
 class ObjectAssertionsTest extends TypeAssertionsTest {
 
   /** @return var[][] */
   protected function typeFixtures() {
-    return [[null], [$this]];
+    return [[null], [new Object()]];
   }
 
   #[@test, @values('typeFixtures')]

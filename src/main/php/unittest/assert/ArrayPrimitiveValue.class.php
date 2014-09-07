@@ -36,4 +36,24 @@ class ArrayPrimitiveValue extends Value {
       ['%s does not contain '.$rep, '%s contains '.$rep]
     ));
   }
+
+  public function startsWith($element) {
+    $rep= Value::stringOf($element);
+    return $this->is(new Match(
+      function($value) use($element) {
+        return sizeof($value) > 0 && Objects::equal($value[0], $element);
+      },
+      ['%s does not start with '.$rep, '%s starts with '.$rep]
+    ));
+  }
+
+  public function endsWith($element) {
+    $rep= Value::stringOf($element);
+    return $this->is(new Match(
+      function($value) use($element) {
+        return sizeof($value) > 0 && Objects::equal($value[sizeof($value) - 1], $element);
+      },
+      ['%s does not end with '.$rep, '%s ends with '.$rep]
+    ));
+  }
 }
