@@ -11,9 +11,25 @@ class ArrayAssertionsTest extends AbstractAssertionsTest {
     $this->assertVerified(Value::of($value)->hasSize(sizeof($value)));
   }
 
+  #[@test, @values([[[1]], [[1, 2]]])]
+  public function non_empty_array_does_not_have_a_size_of_0($value) {
+    $this->assertUnverified(
+      ['/Failed to verify that \[.*\] has a size of 0/ms'],
+      Value::of([])->hasSize(0)
+    );
+  }
+
   #[@test, @values([[[]], [[1]], [[1, 2]]])]
   public function arrayList_has_size($value) {
     $this->assertVerified(Value::of(ArrayList::newInstance($value))->hasSize(sizeof($value)));
+  }
+
+  #[@test, @values([[[1]], [[1, 2]]])]
+  public function non_empty_arrayList_does_not_have_a_size_of_0($value) {
+    $this->assertUnverified(
+      ['/Failed to verify that lang.types.ArrayList.+ has a size of 0/ms'],
+      Value::of(new ArrayList())->hasSize(0)
+    );
   }
 
   #[@test, @values('fixtures')]
@@ -38,7 +54,7 @@ class ArrayAssertionsTest extends AbstractAssertionsTest {
 
   #[@test, @values('fixtures')]
   public function an_empty_array_does_not_contain_fixture_values($value) {
-    $this->assertUnVerified(
+    $this->assertUnverified(
       ['/Failed to verify that \[.*\] contains .*/ms'],
       Value::of([])->contains($value)
     );
@@ -46,7 +62,7 @@ class ArrayAssertionsTest extends AbstractAssertionsTest {
 
   #[@test, @values('fixtures')]
   public function an_empty_arrayList_does_not_contain_fixture_values($value) {
-    $this->assertUnVerified(
+    $this->assertUnverified(
       ['/Failed to verify that lang.types.ArrayList.+ contains .*/ms'],
       Value::of(new ArrayList())->contains($value)
     );
@@ -64,7 +80,7 @@ class ArrayAssertionsTest extends AbstractAssertionsTest {
 
   #[@test, @values('fixtures')]
   public function an_array_of_the_fixture_value_contains_the_value_via_doesNotContain($value) {
-    $this->assertUnVerified(
+    $this->assertUnverified(
       ['/Failed to verify that \[.*\] does not contain .*/ms'],
       Value::of([])->doesNotContain($value)
     );
@@ -72,8 +88,9 @@ class ArrayAssertionsTest extends AbstractAssertionsTest {
 
   #[@test, @values('fixtures')]
   public function an_arrayList_of_the_fixture_value_contains_the_value_via_doesNotContain($value) {
-    $this->assertUnVerified(
+    $this->assertUnverified(
       ['/Failed to verify that lang.types.ArrayList.+ does not contain .*/ms'],
       Value::of(new ArrayList($value))->doesNotContain($value)
     );
-  }}
+  }
+}
