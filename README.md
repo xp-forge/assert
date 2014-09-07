@@ -51,11 +51,14 @@ With special meanings dependant on type:
 
 Transformations
 ---------------
-Values can be transformed prior to invoking assertions on them:
+Values can be transformed prior to invoking assertions on them.
 
-Extraction:
+Extraction works for instances and maps.
 
 ```php
 $person= new Person(0xD00D, 'The Dude');
 Assert::that($person)->extracting('name')->isEqualTo('The Dude');
+
+$person= ['name' => 'Test', 'age' => 42];
+Assert::that($person)->extracting(['name', 'age'])->isEqualTo(['Test', 42]);
 ```
