@@ -1,5 +1,6 @@
 <?php namespace unittest\assert;
 
+use lang\Type;
 use util\Objects;
 use unittest\AssertionFailedError;
 use lang\types\ArrayList;
@@ -209,5 +210,15 @@ class Value extends \lang\Object {
    */
   public function doesNotContain($element) {
     return $this->is(new NotPossible('does not contain anything'));
+  }
+
+  /**
+   * Assert a given value is an instance of a given type
+   *
+   * @param  var $type
+   * @return self
+   */
+  public function isInstanceOf($type) {
+    return $this->is(new Instance($type instanceof Type ? $type : Type::forName($type)));
   }
 }

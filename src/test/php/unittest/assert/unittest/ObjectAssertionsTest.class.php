@@ -2,6 +2,7 @@
 
 use unittest\assert\Value;
 use lang\Object;
+use lang\XPClass;
 
 class ObjectAssertionsTest extends TypeAssertionsTest {
 
@@ -10,11 +11,29 @@ class ObjectAssertionsTest extends TypeAssertionsTest {
     return [[null], [new Object()]];
   }
 
-  #[@test, @values('typeFixtures')]
-  public function objects_do_not_have_a_size($value) {
+  #[@test, @values([['unittest.TestCase', 'lang.Object']])]
+  public function verify_is_instance_of($parent) {
+    $this->assertVerified(Value::of($this)->isInstanceOf($parent));
+  }
+
+  #[@test, @values('fixtures')]
+  public function is_not_instance_of($value) {
     $this->assertUnverified(
-      ['/Failed to verify that .* has a size/ms'],
-      Value::of($value)->hasSize(0)
+      ['/Failed to verify that .* is an instance of lang.XPClass<lang.Runnable>/ms'],
+      Value::of($value)->isInstanceOf('lang.Runnable')
+    );
+  }
+
+  #[@test, @values([['unittest.TestCase', 'lang.Object']])]
+  public function verify_is_instance_of_class($parent) {
+    $this->assertVerified(Value::of($this)->isInstanceOf(XPClass::forName($parent)));
+  }
+
+  #[@test, @values('fixtures')]
+  public function is_not_instance_of_class($value) {
+    $this->assertUnverified(
+      ['/Failed to verify that .* is an instance of lang.XPClass<lang.Runnable>/ms'],
+      Value::of($value)->isInstanceOf(XPClass::forName('lang.Runnable'))
     );
   }
 
