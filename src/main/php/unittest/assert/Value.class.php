@@ -1,6 +1,7 @@
 <?php namespace unittest\assert;
 
 use util\Objects;
+use unittest\AssertionFailedError;
 
 class Value extends \lang\Object {
   protected $value;
@@ -12,15 +13,19 @@ class Value extends \lang\Object {
   }
 
   public function is(Condition $condition) {
-    $this->verify[]= function() use($condition) {
-      return $condition->matches($this->value);
+    $this->verify[]= function($failed) use($condition) {
+      if (!$condition->matches($this->value)) {
+        $failed->add(new AssertionFailedError('Failed to verify that '.$condition->toString()));
+      }
     };
     return $this;
   }
 
   public function isNot(Condition $condition) {
-    $this->verify[]= function() use($condition) {
-      return !$condition->matches($this->value);
+    $this->verify[]= function($failed) use($condition) {
+      if ($condition->matches($this->value)) {
+        $failed->add(new AssertionFailedError('Failed to verify that not '.$condition->toString()));
+      }
     };
     return $this;
   }

@@ -59,9 +59,7 @@ class Assertions extends \lang\Object implements TestAction {
   public function afterTest(TestCase $t) {
     $failed= new AssertionsFailed();
     foreach (array_shift(self::$verify) as $verify) {
-      if (!$verify()) {
-        $failed->add(new AssertionFailedError('Verification failed'));
-      }
+      $verify($failed);
     }
     $failed->raiseIf();
   }
