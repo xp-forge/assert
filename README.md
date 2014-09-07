@@ -39,6 +39,7 @@ Generic assertions:
 * `isFalse()` - Asserts the value is false
 * `isIn(var $enumerable)` - Asserts the value is in a given enumerable 
 * `isNotIn(var $enumerable)` - Asserts the value is not in a given enumerable
+* `isInstanceOf(var $type)` - Asserts the value is of a given type
 
 With special meanings dependant on type:
 
