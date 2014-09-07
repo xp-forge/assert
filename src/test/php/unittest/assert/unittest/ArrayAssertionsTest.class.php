@@ -4,7 +4,15 @@ use unittest\assert\Value;
 use lang\Object;
 use lang\types\ArrayList;
 
-class ArrayAssertionsTest extends AbstractAssertionsTest {
+class ArrayAssertionsTest extends TypeAssertionsTest {
+
+  /** @return var[][] */
+  protected function typeFixtures() {
+    return [
+      [[]],
+      [new ArrayList()]
+    ];
+  }
 
   #[@test, @values([[[]], [[1]], [[1, 2]]])]
   public function array_has_size($value) {

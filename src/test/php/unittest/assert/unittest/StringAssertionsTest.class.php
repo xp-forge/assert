@@ -3,7 +3,15 @@
 use unittest\assert\Value;
 use lang\types\String;
 
-class StringAssertionsTest extends AbstractAssertionsTest {
+class StringAssertionsTest extends TypeAssertionsTest {
+
+  /** @return var[][] */
+  protected function typeFixtures() {
+    return [
+      ['Fixture'],
+      [new String('Test')]
+    ];
+  }
 
   /** @return var[][] */
   protected function stringsStartingWithTest() {

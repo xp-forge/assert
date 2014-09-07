@@ -37,14 +37,14 @@ abstract class AbstractAssertionsTest extends \unittest\TestCase {
     $this->assertEquals(AssertionsFailed::$EMPTY, $assert->verify(new AssertionsFailed()));
   }
 
-  /** @return var[] */
+  /** @return var[][] */
   protected function fixtures($filter= null) {
     $fixtures= [
-      0, -1, 1,
-      1.0, 0.5,
-      true, false,
-      '', 'Fixture',
-      null, $this,
+      [0], [-1], [1],
+      [1.0], [0.5],
+      [true], [false],
+      [''], ['Fixture'],
+      [null], [$this],
       [[]]
     ];
     if ($filter) {
