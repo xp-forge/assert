@@ -11,6 +11,20 @@ class Value extends \lang\Object {
     $this->verify= $verify;
   }
 
+  public function is(Condition $condition) {
+    $this->verify[]= function() use($condition) {
+      return $condition->matches($this->value);
+    };
+    return $this;
+  }
+
+  public function isNot(Condition $condition) {
+    $this->verify[]= function() use($condition) {
+      return !$condition->matches($this->value);
+    };
+    return $this;
+  }
+
   public function isEqualTo($compare) {
     $this->verify[]= function() use($compare) {
       return Objects::equal($this->value, $compare);
