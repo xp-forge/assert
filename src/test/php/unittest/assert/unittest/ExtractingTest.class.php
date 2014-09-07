@@ -21,6 +21,11 @@ class ExtractingTest extends AbstractAssertionsTest {
         'id'   => function() { return 1; },
         'name' => function() { return 'Test'; },
         'age'  => function() { return 42; }
+      ])],
+      [newinstance('lang.Object', [], [
+        'getId'   => function() { return 1; },
+        'getName' => function() { return 'Test'; },
+        'getAge'  => function() { return 42; }
       ])]
     ];
   }
