@@ -26,57 +26,30 @@ class Value extends \lang\Object {
   }
 
   public function isEqualTo($compare) {
-    $this->verify[]= function() use($compare) {
-      return Objects::equal($this->value, $compare);
-    };
-    return $this;
+    return $this->is(new Equals($compare));
   }
 
   public function isNotEqualTo($compare) {
-    $this->verify[]= function() use($compare) {
-      return !Objects::equal($this->value, $compare);
-    };
-    return $this;
+    return $this->isNot(new Equals($compare));
   }
 
   public function isNull() {
-    $this->verify[]= function() {
-      return null === $this->value;
-    };
-    return $this;
+    return $this->is(new Identical(null));
   }
 
   public function isTrue() {
-    $this->verify[]= function() {
-      return true === $this->value;
-    };
-    return $this;
+    return $this->is(new Identical(true));
   }
 
   public function isFalse() {
-    $this->verify[]= function() {
-      return false === $this->value;
-    };
-    return $this;
+    return $this->is(new Identical(false));
   }
 
   public function isIn($enumerable) {
-    $this->verify[]= function() use($enumerable) {
-      foreach ($enumerable as $value) {
-        if ($value === $this->value) return true;
-      }
-      return false;
-    };
-    return $this;
+    return $this->is(new ContainedIn($enumerable));
   }
 
   public function isNotIn($enumerable) {
-    $this->verify[]= function() use($enumerable) {
-      foreach ($enumerable as $value) {
-        if ($value === $this->value) return false;
-      }
-      return true;
-    };
-    return $this;
+    return $this->isNot(new ContainedIn($enumerable));
   }
 }
