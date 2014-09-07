@@ -5,35 +5,35 @@ use lang\types\String;
 
 class StringAssertionsTest extends AbstractAssertionsTest {
 
-  /** @return var[] */
+  /** @return var[][] */
   protected function stringsStartingWithTest() {
     return [
-      'Test', 'Testing', 'Test 1',
-       new String('Test'), new String('Testing'), new String('Test 1')
+      ['Test'], ['Testing'], ['Test 1'],
+      [new String('Test')], [new String('Testing')], [new String('Test 1')]
     ];
   }
 
-  /** @return var[] */
+  /** @return var[][] */
   protected function stringsEndingWithTest() {
     return [
-      'Test', 'A Test', 'UnitTest',
-      new String('Test'), new String('A Test'), new String('UnitTest')
+      ['Test'], ['A Test'], ['UnitTest'],
+      [new String('Test')], [new String('A Test')], [new String('UnitTest')]
     ];
   }
 
-  /** @return var[] */
+  /** @return var[][] */
   protected function stringsNotContainingTest() {
     return [
-      '', 'test',
-      new String(''), new String('test')
+      [''], ['test'],
+      [new String('')], [new String('test')]
     ];
   }
 
-  /** @return var[] */
+  /** @return var[][] */
   protected function stringsContainingTest() {
     return array_merge($this->stringsStartingWithTest(), $this->stringsEndingWithTest(), [
-      'The Test of everything',
-      new String('The Test of everything')
+      ['The Test of everything'],
+      [new String('The Test of everything')]
     ]);
   }
 
@@ -43,6 +43,14 @@ class StringAssertionsTest extends AbstractAssertionsTest {
   #])]
   public function hasSize($size, $value) {
     $this->assertVerified(Value::of($value)->hasSize($size));
+  }
+
+  #[@test, @values('stringsContainingTest')]
+  public function strings_with_Test_are_not_empty($value) {
+    $this->assertUnverified(
+      ['/Failed to verify that .* has a length of 0/'],
+      Value::of($value)->hasSize(0)
+    );
   }
 
   #[@test, @values('stringsStartingWithTest')]
