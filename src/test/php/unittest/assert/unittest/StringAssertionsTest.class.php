@@ -9,6 +9,14 @@ use lang\types\String;
 class StringAssertionsTest extends AbstractAssertionsTest {
 
   #[@test, @values([
+  #  [0, ''], [4, 'test'],
+  #  [0, new String('')], [4, new String('test')]
+  #])]
+  public function hasSize($size, $value) {
+    Assert::that($value)->hasSize($size);
+  }
+
+  #[@test, @values([
   #  'Test', 'Testing', 'Test 1',
   #  new String('Test'), new String('Testing'), new String('Test 1')
   #])]

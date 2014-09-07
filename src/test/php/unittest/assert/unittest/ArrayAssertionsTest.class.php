@@ -24,8 +24,18 @@ class ArrayAssertionsTest extends AbstractAssertionsTest {
   }
 
   #[@test, @values('fixtures')]
+  public function an_arrayList_of_the_fixture_value_contains_the_value($value) {
+    Assert::that(ArrayList::newInstance([$value]))->contains($value);
+  }
+
+  #[@test, @values('fixtures')]
   public function an_array_of_the_fixture_value_and_an_object_contains_the_value($value) {
     Assert::that([new Object(), $value])->contains($value);
+  }
+
+  #[@test, @values('fixtures')]
+  public function an_arrayList_of_the_fixture_value_and_an_object_contains_the_value($value) {
+    Assert::that(ArrayList::newInstance([new Object(), $value]))->contains($value);
   }
 
   #[@test, @expect('unittest.AssertionFailedError'), @values('fixtures')]

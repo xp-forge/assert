@@ -3,29 +3,26 @@
 class ArrayPrimitiveValue extends Value {
 
   public function hasSize($size) {
-    $this->verify[]= function() use($size) {
+    return $this->is(new Match(function($value) use($size) {
       return sizeof($this->value) === $size;
-    };
-    return $this;
+    }));
   }
 
   public function contains($element) {
-    $this->verify[]= function() use($element) {
+    return $this->is(new Match(function($value) use($element) {
       foreach ($this->value as $value) {
         if ($value === $element) return true;
       }
       return false;
-    };
-    return $this;
+    }));
   }
 
   public function doesNotContain($element) {
-    $this->verify[]= function() use($element) {
+    return $this->isNot(new Match(function($value) use($element) {
       foreach ($this->value as $value) {
-        if ($value === $element) return false;
+        if ($value === $element) return true;
       }
-      return true;
-    };
-    return $this;
+      return false;
+    }));
   }
 }

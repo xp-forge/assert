@@ -2,31 +2,25 @@
 
 class StringValue extends Value {
 
+  public function hasSize($size) {
+    return $this->is(new Match(function($value) use($size) {
+      return $value->length() === $size;
+    }));
+  }
+
   public function startsWith($string) {
-    $this->verify[]= function() use($string) {
-      return $this->value->startsWith($string);
-    };
-    return $this;
+    return $this->is(new Predicate('startsWith', $string));
   }
 
   public function endsWith($string) {
-    $this->verify[]= function() use($string) {
-      return @$this->value->endsWith($string);
-    };
-    return $this;
+    return $this->is(new Predicate('endsWith', $string));
   }
 
   public function contains($string) {
-    $this->verify[]= function() use($string) {
-      return $this->value->contains($string);
-    };
-    return $this;
+    return $this->is(new Predicate('contains', $string));
   }
 
   public function doesNotContain($string) {
-    $this->verify[]= function() use($string) {
-      return !$this->value->contains($string);
-    };
-    return $this;
+    return $this->isNot(new Predicate('contains', $string));
   }
 }

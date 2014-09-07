@@ -3,23 +3,16 @@
 class ArrayValue extends Value {
 
   public function hasSize($size) {
-    $this->verify[]= function() use($size) {
-      return $this->value->length === $size;
-    };
-    return $this;
+    return $this->is(new Match(function($value) use($size) {
+      return $value->length === $size;
+    }));
   }
 
   public function contains($element) {
-    $this->verify[]= function() use($element) {
-      return $this->value->contains($element);
-    };
-    return $this;
+    return $this->is(new Predicate('contains', $element));
   }
 
   public function doesNotContain($element) {
-    $this->verify[]= function() use($element) {
-      return !$this->value->contains($element);
-    };
-    return $this;
+    return $this->isNot(new Predicate('contains', $element));
   }
 }
