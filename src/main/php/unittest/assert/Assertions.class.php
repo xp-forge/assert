@@ -18,23 +18,14 @@ class Assertions extends \lang\Object implements TestAction {
   /**
    * Creates a new verification
    *
-   * @param  var $value
+   * @param  unittest.assert.Value $value
    * @return unittest.assert.Value
    * @throws lang.IllegalStateException
    */
   public static function verifyThat($value) {
     if (self::$verify) {
-      if (is_array($value)) {
-        return new ArrayPrimitiveValue($value, self::$verify[self::CURRENT]);
-      } else if (is_string($value)) {
-        return new StringPrimitiveValue($value, self::$verify[self::CURRENT]);
-      } else if ($value instanceof \lang\types\ArrayList) {
-        return new ArrayValue($value, self::$verify[self::CURRENT]);
-      } else if ($value instanceof \lang\types\String) {
-        return new StringValue($value, self::$verify[self::CURRENT]);
-      } else {
-        return new Value($value, self::$verify[self::CURRENT]);
-      }
+      self::$verify[self::CURRENT]->add($value);
+      return $value;
     } else {
       throw new IllegalStateException('You need to decorate your unittest class with '.self::DECLARATION);
     }
@@ -58,8 +49,8 @@ class Assertions extends \lang\Object implements TestAction {
    */
   public function afterTest(TestCase $t) {
     $failed= new AssertionsFailed();
-    foreach (array_shift(self::$verify) as $verify) {
-      $verify($failed);
+    foreach (array_shift(self::$verify) as $value) {
+      $value->verify($failed);
     }
     $failed->raiseIf();
   }

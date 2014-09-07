@@ -7,9 +7,14 @@ class Value extends \lang\Object {
   protected $value;
   protected $verify= [];
 
-  public function __construct($value, $verify) {
+  public function __construct($value) {
     $this->value= $value;
-    $this->verify= $verify;
+  }
+
+  public function verify($failed) {
+    foreach ($this->verify as $verify) {
+      $verify($failed);
+    }
   }
 
   public function is(Condition $condition) {
