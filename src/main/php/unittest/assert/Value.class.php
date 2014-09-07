@@ -27,8 +27,10 @@ class Value extends \lang\Object {
    * @return unittest.assert.Value
    */
   public static function of($value) {
-    if (is_array($value)) {
+    if (is_array($value) && 0 === key($value)) {
       return new ArrayPrimitiveValue($value);
+    } else if (is_array($value)) {
+      return new MapPrimitiveValue($value);
     } else if (is_string($value)) {
       return new StringPrimitiveValue($value);
     } else if ($value instanceof ArrayList) {
@@ -220,5 +222,24 @@ class Value extends \lang\Object {
    */
   public function isInstanceOf($type) {
     return $this->is(new Instance($type instanceof Type ? $type : Type::forName($type)));
+  }
+
+  /**
+   * Extract a given arg
+   *
+   * @param  var $arg
+   * @return self
+   */
+  public function extracting($arg) {
+    $extractor= new InstanceExtractor($this->value);
+    if (is_array($arg)) {
+      $value= [];
+      foreach ($arg as $key) {
+        $value[]= $extractor->extract($key);
+      }
+      return new self($value);
+    } else {
+      return new self($extractor->extract($arg));
+    }
   }
 }

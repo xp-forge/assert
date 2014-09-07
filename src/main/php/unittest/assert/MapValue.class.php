@@ -22,4 +22,22 @@ class MapValue extends Value {
       '%s contains %s',
     ]));
   }
+
+  /**
+   * Extract a given arg
+   *
+   * @param  var $arg
+   * @return self
+   */
+  public function extracting($arg) {
+    if (is_array($arg)) {
+      $value= [];
+      foreach ($arg as $key) {
+        $value[]= $this->value[$key];
+      }
+      return self::of($value);
+    } else {
+      return self::of($this->value[$arg]);
+    }
+  }
 }
