@@ -109,4 +109,12 @@ class AssertionsTest extends AbstractAssertionsTest {
       Value::of($value)->isFalse()
     );
   }
+
+  #[@test, @values([new Object(), null])]
+  public function objects_do_not_have_a_size($value) {
+    $this->assertUnverified(
+      ['/Failed to verify that .* has a size/ms'],
+      Value::of($value)->hasSize(0)
+    );
+  }
 }
