@@ -1,6 +1,6 @@
 <?php namespace unittest\assert;
 
-class Identical extends \lang\Object implements Condition {
+class Identical extends Condition {
   protected $value;
 
   public function __construct($value) {
@@ -9,5 +9,14 @@ class Identical extends \lang\Object implements Condition {
 
   public function matches($value) {
     return $this->value === $value;
+  }
+
+  public function describe($value, $positive) {
+    return sprintf(
+      '%s %s %s', 
+      self::stringOf($value),
+      $positive ? 'is' : 'is not',
+      self::stringOf($this->value)
+    );
   }
 }

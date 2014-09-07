@@ -2,7 +2,7 @@
 
 use util\Objects;
 
-class Equals extends \lang\Object implements Condition {
+class Equals extends Condition {
   protected $value;
 
   public function __construct($value) {
@@ -11,5 +11,14 @@ class Equals extends \lang\Object implements Condition {
 
   public function matches($value) {
     return Objects::equal($this->value, $value);
+  }
+
+  public function describe($value, $positive) {
+    return sprintf(
+      '%s %s %s', 
+      self::stringOf($value),
+      $positive ? 'is equal to' : 'is not equal to',
+      self::stringOf($this->value)
+    );
   }
 }

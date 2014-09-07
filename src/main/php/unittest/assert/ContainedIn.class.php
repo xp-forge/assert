@@ -1,6 +1,6 @@
 <?php namespace unittest\assert;
 
-class ContainedIn extends \lang\Object implements Condition {
+class ContainedIn extends Condition {
   protected $enumerable;
 
   public function __construct($enumerable) {
@@ -12,5 +12,14 @@ class ContainedIn extends \lang\Object implements Condition {
       if ($element === $value) return true;
     }
     return false;
+  }
+
+  public function describe($value, $positive) {
+    return sprintf(
+      '%s %s %s', 
+      $this->stringOf($value),
+      $positive ? 'is contained in' : 'is not contained in',
+      self::stringOf($this->enumerable)
+    );
   }
 }

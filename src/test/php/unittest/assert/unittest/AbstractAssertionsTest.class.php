@@ -1,6 +1,41 @@
 <?php namespace unittest\assert\unittest;
 
+use unittest\assert\AssertionsFailed;
+use unittest\AssertionFailedError;
+use unittest\FormattedMessage;
+
 abstract class AbstractAssertionsTest extends \unittest\TestCase {
+
+  /**
+   * Assertion helpeer
+   *
+   * @param  string[] $patterns
+   * @param  unittest.assert.Value $assert
+   * @throws unittest.AssertionFailedError
+   */
+  protected function assertUnverified($patterns, $assert) {
+    $messages= new AssertionsFailed();
+    foreach ($assert->verify(new AssertionsFailed())->failures() as $i => $failure) {
+      $message= $failure->getMessage();
+      if (!preg_match($patterns[$i], $message)) {
+        $messages->add(new AssertionFailedError(new FormattedMessage(
+          'Expected `%s` to match %s',
+          [$message, $patterns[$i]]
+        )));
+      }
+    }
+    $messages->raiseIf();
+  }
+
+  /**
+   * Assertion helpeer
+   *
+   * @param  unittest.assert.Value $assert
+   * @throws unittest.AssertionFailedError
+   */
+  protected function assertVerified($assert) {
+    $this->assertEquals(AssertionsFailed::$EMPTY, $assert->verify(new AssertionsFailed()));
+  }
 
   /** @return var[] */
   protected function fixtures($filter= null) {

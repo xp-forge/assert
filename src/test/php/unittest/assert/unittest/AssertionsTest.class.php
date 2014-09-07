@@ -1,90 +1,112 @@
 <?php namespace unittest\assert\unittest;
 
-use unittest\assert\Assert;
-use unittest\assert\Assertions;
+use unittest\assert\Value;
 use lang\Object;
 use lang\types\String;
 
-#[@action(new Assertions())]
 class AssertionsTest extends AbstractAssertionsTest {
 
   #[@test, @values('fixtures')]
   public function fixtures_are_equal_to_itself_via_isEqualTo($value) {
-    Assert::that($value)->isEqualTo($value);
+    $this->assertVerified(Value::of($value)->isEqualTo($value));
   }
 
-  #[@test, @expect('unittest.AssertionFailedError'), @values('fixtures')]
+  #[@test, @values('fixtures')]
   public function fixtures_are_not_equal_to_new_object_via_isEqualTo($value) {
-    Assert::that($value)->isEqualTo(new Object());
+    $this->assertUnverified(
+      ['/Failed to verify that .* is equal to lang.Object .+/ms'],
+      Value::of($value)->isEqualTo(new Object())
+    );
   }
 
   #[@test, @values('fixtures')]
   public function fixtures_are_not_equal_to_new_object_via_isNotEqualTo($value) {
-    Assert::that($value)->isNotEqualTo(new Object());
+    $this->assertVerified(Value::of($value)->isNotEqualTo(new Object()));
   }
 
-  #[@test, @expect('unittest.AssertionFailedError'), @values('fixtures')]
+  #[@test, @values('fixtures')]
   public function fixtures_are_equal_to_itself_via_isNotEqualTo($value) {
-    Assert::that($value)->isNotEqualTo($value);
+    $this->assertUnverified(
+      ['/Failed to verify that .* is not equal to .*/ms'],
+      Value::of($value)->isNotEqualTo($value)
+    );
   }
 
   #[@test, @values('fixtures')]
   public function is_in_an_array_of_itself($value) {
-    Assert::that($value)->isIn([$value]);
+    $this->assertVerified(Value::of($value)->isIn([$value]));
   }
 
   #[@test, @values('fixtures')]
   public function is_in_an_array_of_itself_and_an_object($value) {
-    Assert::that($value)->isIn([new Object(), $value]);
+    $this->assertVerified(Value::of($value)->isIn([new Object(), $value]));
   }
 
-  #[@test, @expect('unittest.AssertionFailedError'), @values('fixtures')]
+  #[@test, @values('fixtures')]
   public function is_not_in_an_empty_array($value) {
-    Assert::that($value)->isIn([]);
+    $this->assertUnverified(
+      ['/Failed to verify that .* is contained in .*/ms'],
+      Value::of($value)->isIn([])
+    );
   }
 
-  #[@test, @expect('unittest.AssertionFailedError'), @values('fixtures')]
+  #[@test, @values('fixtures')]
   public function is_in_an_array_of_itself_via_isNotIn($value) {
-    Assert::that($value)->isNotIn([$value]);
+    $this->assertUnverified(
+      ['/Failed to verify that .* is not contained in .*/ms'],
+      Value::of($value)->isIn([$value])
+    );
   }
 
-  #[@test, @expect('unittest.AssertionFailedError'), @values('fixtures')]
+  #[@test, @values('fixtures')]
   public function is_in_an_array_of_itself_and_an_object_via_isNotIn($value) {
-    Assert::that($value)->isNotIn([new Object(), $value]);
+    $this->assertUnverified(
+      ['/Failed to verify that .* is not contained in .*/ms'],
+      Value::of($value)->isNotIn([new Object(), $value])
+    );
   }
 
   #[@test, @values('fixtures')]
   public function is_not_in_an_empty_array_via_isNotIn($value) {
-    Assert::that($value)->isNotIn([]);
+    $this->assertVerified(Value::of($value)->isNotIn([]));
   }
 
   #[@test]
   public function null_is_null() {
-    Assert::that(null)->isNull();
+    $this->assertVerified(Value::of(null)->isNull());
   }
 
-  #[@test, @expect('unittest.AssertionFailedError'), @values(source= 'fixtures', args= [[null]])]
+  #[@test, @values(source= 'fixtures', args= [[null]])]
   public function all_other_values_are_not_null($value) {
-    Assert::that($value)->isNull();
+    $this->assertUnverified(
+      ['/Failed to verify that .* is null/ms'],
+      Value::of($value)->isNull()
+    );
   }
 
   #[@test]
   public function true_is_true() {
-    Assert::that(true)->isTrue();
+    $this->assertVerified(Value::of(true)->isTrue());
   }
 
-  #[@test, @expect('unittest.AssertionFailedError'), @values(source= 'fixtures', args= [[true]])]
+  #[@test, @values(source= 'fixtures', args= [[true]])]
   public function all_other_values_are_not_true($value) {
-    Assert::that($value)->isTrue();
+    $this->assertUnverified(
+      ['/Failed to verify that .* is true/ms'],
+      Value::of($value)->isTrue()
+    );
   }
 
   #[@test]
   public function false_is_false() {
-    Assert::that(false)->isFalse();
+    $this->assertVerified(Value::of(false)->isFalse());
   }
 
-  #[@test, @expect('unittest.AssertionFailedError'), @values(source= 'fixtures', args= [[false]])]
+  #[@test, @values(source= 'fixtures', args= [[false]])]
   public function all_other_values_are_not_false($value) {
-    Assert::that($value)->isFalse();
+    $this->assertUnverified(
+      ['/Failed to verify that .* is false/ms'],
+      Value::of($value)->isFalse()
+    );
   }
 }

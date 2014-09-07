@@ -9,10 +9,16 @@ class ArrayValue extends Value {
   }
 
   public function contains($element) {
-    return $this->is(new Predicate('contains', $element));
+    return $this->is(new Predicate('contains', $element, [
+      '%s does not contain %s',
+      '%s contains %s',
+    ]));
   }
 
   public function doesNotContain($element) {
-    return $this->isNot(new Predicate('contains', $element));
+    return $this->isNot(new Predicate('contains', $element, [
+      '%s does not contain %s',
+      '%s contains %s',
+    ]));
   }
 }

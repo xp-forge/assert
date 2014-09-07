@@ -1,11 +1,8 @@
 <?php namespace unittest\assert\unittest;
 
-use unittest\assert\Assert;
-use unittest\assert\Assertions;
-use lang\Object;
+use unittest\assert\Value;
 use lang\types\String;
 
-#[@action(new Assertions())]
 class StringAssertionsTest extends AbstractAssertionsTest {
 
   #[@test, @values([
@@ -13,7 +10,7 @@ class StringAssertionsTest extends AbstractAssertionsTest {
   #  [0, new String('')], [4, new String('test')]
   #])]
   public function hasSize($size, $value) {
-    Assert::that($value)->hasSize($size);
+    $this->assertVerified(Value::of($value)->hasSize($size));
   }
 
   #[@test, @values([
@@ -21,15 +18,18 @@ class StringAssertionsTest extends AbstractAssertionsTest {
   #  new String('Test'), new String('Testing'), new String('Test 1')
   #])]
   public function strings_with_Test_start_with_Test($value) {
-    Assert::that($value)->startsWith('Test');
+    $this->assertVerified(Value::of($value)->startsWith('Test'));
   }
 
-  #[@test, @expect('unittest.AssertionFailedError'), @values([
+  #[@test, @values([
   #  '', 'test',
   #  new String(''), new String('test')
   #])]
   public function other_values_dont_start_with_Test($value) {
-    Assert::that($value)->startsWith('Test');
+    $this->assertUnverified(
+      ['/Failed to verify that .* starts with "Test"/'],
+      Value::of($value)->startsWith('Test')
+    );
   }
 
   #[@test, @values([
@@ -37,15 +37,18 @@ class StringAssertionsTest extends AbstractAssertionsTest {
   #  new String('Test'), new String('A Test'), new String('UnitTest')
   #])]
   public function strings_with_Test_end_with_Test($value) {
-    Assert::that($value)->endsWith('Test');
+    $this->assertVerified(Value::of($value)->endsWith('Test'));
   }
 
-  #[@test, @expect('unittest.AssertionFailedError'), @values([
+  #[@test, @values([
   #  '', 'test',
   #  new String(''), new String('test')
   #])]
   public function other_values_dont_end_with_Test($value) {
-    Assert::that($value)->endsWith('Test');
+    $this->assertUnverified(
+      ['/Failed to verify that .* ends with "Test"/'],
+      Value::of($value)->endsWith('Test')
+    );
   }
 
   #[@test, @values([
@@ -57,18 +60,14 @@ class StringAssertionsTest extends AbstractAssertionsTest {
   #  new String('The Test of everything')
   #])]
   public function strings_with_Test_contain_Test($value) {
-    Assert::that($value)->contains('Test');
+    $this->assertVerified(Value::of($value)->contains('Test'));
   }
 
-  #[@test, @expect('unittest.AssertionFailedError'), @values([
-  #  'Test', 'Testing', 'Test 1',
-  #  'A Test', 'UnitTest',
-  #  'The Test of everything',
-  #  new String('Test'), new String('Testing'), new String('Test 1'),
-  #  new String('A Test'), new String('UnitTest'),
-  #  new String('The Test of everything')
+  #[@test, @values([
+  #  '', 'test',
+  #  new String(''), new String('test')
   #])]
-  public function strings_with_Test_contain_Test_via_doesNotContain($value) {
-    Assert::that($value)->doesNotContain('Test');
+  public function other_values_dont_contain_Test($value) {
+    $this->assertVerified(Value::of($value)->doesNotContain('Test'));
   }
 }
