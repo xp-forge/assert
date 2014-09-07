@@ -20,8 +20,7 @@ class ExampleTest extends AbstractAssertionsTest {
 
   #[@test]
   public function example() {
-    $people= ...;
-    Assert::that($people)->hasSize(1)->contains('The Dude');
+    Assert::that(['The Dude'])->hasSize(1)->contains('The Dude');
   }
 }
 ```
