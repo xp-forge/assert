@@ -13,16 +13,16 @@ class ExtractingTest extends AbstractAssertionsTest {
       [['id' => 1, 'name' => 'Test', 'age' => 42, 'department' => ['name' => 'Test']]],
       [new ArrayMap(['id' => 1, 'name' => 'Test', 'age' => 42, 'department' => ['name' => 'Test']])],
       [newinstance('lang.Object', [], [
-        'id'         => 1,
-        'name'       => 'Test',
-        'age'        => 42,
-        'department' => ['name' => 'Test']
+        'id'            => 1,
+        'name'          => 'Test',
+        'age'           => 42,
+        'department'    => ['name' => 'Test']
       ])],
       [newinstance('lang.Object', [], [
-        'id'         => function() { return 1; },
-        'name'       => function() { return 'Test'; },
-        'age'        => function() { return 42; },
-        'department' => function() { return ['name' => 'Test']; }
+        'id'            => function() { return 1; },
+        'name'          => function() { return 'Test'; },
+        'age'           => function() { return 42; },
+        'department'    => function() { return ['name' => 'Test']; }
       ])],
       [newinstance('lang.Object', [], [
         'getId'         => function() { return 1; },
