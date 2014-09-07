@@ -237,9 +237,9 @@ class Value extends \lang\Object {
       foreach ($arg as $key) {
         $value[]= $extractor->extract($key);
       }
-      return new self($value);
+      return self::of($value);
     } else {
-      return new self($extractor->extract($arg));
+      return self::of($extractor->extract($arg));
     }
   }
 }
