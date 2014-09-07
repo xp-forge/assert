@@ -12,7 +12,7 @@ class ArrayPrimitiveValue extends Value {
   }
 
   public function contains($element) {
-    $rep= Objects::stringOf($element);
+    $rep= Value::stringOf($element);
     return $this->is(new Match(
       function($value) use($element) {
         foreach ($this->value as $value) {
@@ -25,7 +25,7 @@ class ArrayPrimitiveValue extends Value {
   }
 
   public function doesNotContain($element) {
-    $rep= Objects::stringOf($element);
+    $rep= Value::stringOf($element);
     return $this->isNot(new Match(
       function($value) use($element) {
         foreach ($this->value as $value) {

@@ -16,6 +16,6 @@ class Predicate extends Condition {
   }
 
   public function describe($value, $positive) {
-    return sprintf($this->format[$positive], self::stringOf($value), self::stringOf($this->arg));
+    return sprintf($this->format[$positive], Value::stringOf($value), Value::stringOf($this->arg));
   }
 }

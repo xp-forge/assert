@@ -27,6 +27,10 @@ class Value extends \lang\Object {
     }
   }
 
+  public static function stringOf($value) {
+    return null === $value ? 'null' : Objects::stringOf($value);
+  }
+
   public function verify($failed) {
     foreach ($this->verify as $verify) {
       $verify($failed);

@@ -22,6 +22,6 @@ class Match extends Condition {
   }
 
   public function describe($value, $positive) {
-    return sprintf($this->format[$positive], self::stringOf($value));
+    return sprintf($this->format[$positive], Value::stringOf($value));
   }
 }

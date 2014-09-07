@@ -14,9 +14,9 @@ class Identical extends Condition {
   public function describe($value, $positive) {
     return sprintf(
       '%s %s %s', 
-      self::stringOf($value),
+      Value::stringOf($value),
       $positive ? 'is' : 'is not',
-      self::stringOf($this->value)
+      Value::stringOf($this->value)
     );
   }
 }
