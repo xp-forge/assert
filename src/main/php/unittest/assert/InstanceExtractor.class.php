@@ -1,12 +1,32 @@
 <?php namespace unittest\assert;
 
+use lang\Generic;
+use lang\IndexOutOfBoundsException;
+
+/**
+ * Extracts properties from a given instance
+ *
+ * @test  xp://unittest.assert.unittest.InstanceExtractorTest
+ */
 class InstanceExtractor extends \lang\Object {
   protected $value;
 
-  public function __construct($value) {
+  /**
+   * Creates a new instance with a given value
+   *
+   * @param  lang.Generic $value
+   */
+  public function __construct(Generic $value) {
     $this->value= $value;
   }
 
+  /**
+   * Extracts a given key
+   *
+   * @param  string $key
+   * @param  var
+   * @throws lang.IndexOutOfBoundsException
+   */
   public function extract($key) {
     if (property_exists($this->value, $key)) {
       return $this->value->{$key};
@@ -15,6 +35,6 @@ class InstanceExtractor extends \lang\Object {
         if (method_exists($this->value, $variant)) return $this->value->{$variant}();
       }
     }
-    throw new \lang\IndexOutOfBoundsException('Cannot extract "'.$key.'" from '.Value::stringOf($this->value));
+    throw new IndexOutOfBoundsException('Cannot extract "'.$key.'" from '.Value::stringOf($this->value));
   }
 }
