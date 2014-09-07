@@ -56,4 +56,18 @@ class ArrayPrimitiveValue extends Value {
       ['%s does not end with '.$rep, '%s ends with '.$rep]
     ));
   }
+
+  /**
+   * Extract a given arg
+   *
+   * @param  var $arg
+   * @return self
+   */
+  public function extracting($arg) {
+    $return= [];
+    foreach ($this->value as $value) {
+      $return[]= self::of($value)->extracting($arg)->value;
+    }
+    return self::of($return);
+  }
 }

@@ -48,4 +48,9 @@ class ExtractingTest extends AbstractAssertionsTest {
   public function extracting_chained($person) {
     $this->assertVerified(Value::of($person)->extracting('department')->extracting('name')->isEqualTo('Test'));
   }
+
+  #[@test, @values('people')]
+  public function extracting_from_array($person) {
+    $this->assertVerified(Value::of([$person, $person])->extracting('name')->isEqualTo(['Test', 'Test']));
+  }
 }
