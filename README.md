@@ -48,3 +48,14 @@ With special meanings dependant on type:
 * `endsWith(var $element)` - Asserts a string or array contains the given element at its end
 * `contains(var $element)` - Asserts a string, array or map contains a given element
 * `doesNotContain(var $element)` - Asserts a string, array or map does not contain a given element
+
+Transformations
+---------------
+Values can be transformed prior to invoking assertions on them:
+
+Extraction:
+
+```php
+$person= new Person(0xD00D, 'The Dude');
+Assert::that($person)->extracting('name')->isEqualTo('The Dude');
+```
