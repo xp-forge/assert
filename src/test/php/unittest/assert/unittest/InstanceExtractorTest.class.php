@@ -5,7 +5,7 @@ use unittest\assert\InstanceExtractor;
 /**
  * Tests the `InstanceExtractor` class.
  */
-class InstanceExtractorTest extends AbstractAssertionsTest {
+class InstanceExtractorTest extends \unittest\TestCase {
 
   /** @return lang.Object */
   protected function fixture($def) {
