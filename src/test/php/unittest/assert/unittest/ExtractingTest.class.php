@@ -8,6 +8,7 @@ use lang\types\ArrayMap;
  */
 class ExtractingTest extends AbstractAssertionsTest {
 
+  /** @return var[][] */
   protected function people() {
     return [
       [['id' => 1, 'name' => 'Test', 'age' => 42, 'department' => ['name' => 'Test']]],
