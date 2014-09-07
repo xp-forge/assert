@@ -12,10 +12,10 @@ class AssertionsFailed extends \lang\Object {
     self::$EMPTY= new self();
   }
 
-  /** 
+  /**
    * Adds an error
    *
-   * @param  unittest.AssertionfailuresError $e
+   * @param  unittest.AssertionFailedError $e
    * @return void
    */
   public function add(AssertionFailedError $e) {
@@ -28,6 +28,12 @@ class AssertionsFailed extends \lang\Object {
   /** @return unittest.AssertionfailuresError[] */
   public function failures() { return $this->failures; }
 
+  /**
+   * Raise an exception if not empty
+   *
+   * @throws unittest.AssertionFailedError
+   * @return void
+   */
   public function raiseIf() {
     switch (sizeof($this->failures)) {
       case 0: return;
@@ -45,6 +51,12 @@ class AssertionsFailed extends \lang\Object {
     }
   }
 
+  /**
+   * Check for equality
+   *
+   * @param  var $cmp
+   * @return bool
+   */
   public function equals($cmp) {
     return $cmp instanceof self && Objects::equal($cmp->failures, $this->failures);
   }

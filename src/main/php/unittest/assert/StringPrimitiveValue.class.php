@@ -29,14 +29,22 @@ class StringPrimitiveValue extends Value {
   }
 
   public function contains($string) {
-    return $this->is(new Match(function($value) use($string) {
-      return false !== strpos($value, $string);
-    }));
+    $rep= Condition::stringOf($string);
+    return $this->is(new Match(
+      function($value) use($string) {
+        return false !== strpos($value, $string);
+      },
+      ['%s does not contain '.$rep, '%s contains '.$rep]
+    ));
   }
 
   public function doesNotContain($string) {
-    return $this->is(new Match(function($value) use($string) {
-      return false === strpos($value, $string);
-    }));
+    $rep= Condition::stringOf($string);
+    return $this->isNot(new Match(
+      function($value) use($string) {
+        return false !== strpos($value, $string);
+      },
+      ['%s does not contain '.$rep, '%s contains '.$rep]
+    ));
   }
 }
