@@ -16,7 +16,7 @@ class Value extends \lang\Object {
    *
    * @param  var $value
    */
-  protected function __construct($value) {
+  public function __construct($value) {
     $this->value= $value;
   }
 
