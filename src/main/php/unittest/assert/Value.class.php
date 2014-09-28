@@ -26,6 +26,11 @@ class Value extends \lang\Object {
     ;
   }
 
+  /**
+   * Creates a new instance
+   *
+   * @param  var $value
+   */
   public function __construct($value) {
     $this->value= $value;
   }
