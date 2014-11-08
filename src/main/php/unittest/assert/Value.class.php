@@ -1,15 +1,30 @@
 <?php namespace unittest\assert;
 
 use lang\Type;
+use lang\XPClass;
+use lang\ArrayType;
+use lang\MapType;
+use lang\Primitive;
 use util\Objects;
 use unittest\AssertionFailedError;
-use lang\types\ArrayList;
-use lang\types\ArrayMap;
-use lang\types\String;
 
 class Value extends \lang\Object {
+  protected static $types;
   protected $value;
   protected $verify= [];
+
+  static function __static() {
+    $ctor= Type::forName('function(var): unittest.assert.Value');
+    self::$types= (new TypeMap())
+      ->map(Primitive::$STRING, $ctor->cast('unittest\assert\StringPrimitiveValue::new'))
+      ->map(ArrayType::forName('var[]'), $ctor->cast('unittest\assert\ArrayPrimitiveValue::new'))
+      ->map(MapType::forName('[:var]'), $ctor->cast('unittest\assert\MapPrimitiveValue::new'))
+      ->map(XPClass::forName('lang.types.String'), $ctor->cast('unittest\assert\StringValue::new'))
+      ->map(XPClass::forName('lang.types.ArrayList'), $ctor->cast('unittest\assert\ArrayValue::new'))
+      ->map(XPClass::forName('lang.types.ArrayMap'), $ctor->cast('unittest\assert\MapValue::new'))
+      ->map(Type::$VAR, $ctor->cast('unittest\assert\Value::new'))
+    ;
+  }
 
   /**
    * Creates a new instance
@@ -27,21 +42,8 @@ class Value extends \lang\Object {
    * @return unittest.assert.Value
    */
   public static function of($value) {
-    if (is_array($value) && 0 === key($value)) {
-      return new ArrayPrimitiveValue($value);
-    } else if (is_array($value)) {
-      return new MapPrimitiveValue($value);
-    } else if (is_string($value)) {
-      return new StringPrimitiveValue($value);
-    } else if ($value instanceof ArrayList) {
-      return new ArrayValue($value);
-    } else if ($value instanceof ArrayMap) {
-      return new MapValue($value);
-    } else if ($value instanceof String) {
-      return new StringValue($value);
-    } else {
-      return new Value($value);
-    }
+    $ctor= self::$types[typeof($value)];
+    return $ctor($value);
   }
 
   /**

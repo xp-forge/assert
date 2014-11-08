@@ -2,6 +2,8 @@
 
 class StringPrimitiveValue extends Value {
 
+  static function __static() { }
+
   public function hasSize($size) {
     return $this->is(new Match(
       function($value) use($size) { return strlen($value) === $size;; },
