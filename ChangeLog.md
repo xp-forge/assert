@@ -3,6 +3,10 @@ Data sequences change log
 
 ## ?.?.? / ????-??-??
 
+* Fixed issue #2 by changing precedence in which extraction accesses
+  properties: Accessor methods first, then properties directly
+  (@thekid)
+
 ## 0.6.0 / 2015-01-10
 
 * Made available via Composer - @thekid

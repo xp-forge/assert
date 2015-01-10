@@ -30,7 +30,8 @@ class ExtractingTest extends AbstractAssertionsTest {
         'getName'       => function() { return 'Test'; },
         'getAge'        => function() { return 42; },
         'getDepartment' => function() { return ['name' => 'Test']; }
-      ])]
+      ])],
+      [new Person(1, 'Test', 42, ['name' => 'Test'])]
     ];
   }
 

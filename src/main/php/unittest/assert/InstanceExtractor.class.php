@@ -28,12 +28,11 @@ class InstanceExtractor extends \lang\Object {
    * @throws lang.IndexOutOfBoundsException
    */
   public function extract($key) {
+    foreach ([$key, 'get'.$key] as $variant) {
+      if (method_exists($this->value, $variant)) return $this->value->{$variant}();
+    }
     if (property_exists($this->value, $key)) {
       return $this->value->{$key};
-    } else {
-      foreach ([$key, 'get'.$key] as $variant) {
-        if (method_exists($this->value, $variant)) return $this->value->{$variant}();
-      }
     }
     throw new IndexOutOfBoundsException('Cannot extract "'.$key.'" from '.Value::stringOf($this->value));
   }
