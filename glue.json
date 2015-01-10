@@ -1,7 +1,0 @@
-{
-  "name"    : "xp-forge/assert",
-  "version" : "0.5.1",
-  "require" : {
-    "xp-framework/core" : "~6.0"
-  }
-}
