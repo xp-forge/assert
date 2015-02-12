@@ -3,6 +3,10 @@ Data sequences change log
 
 ## ?.?.? / ????-??-??
 
+## 0.6.2 / 2015-02-12
+
+* Changed dependency to use XP ~6.0 (instead of dev-master) - @thekid
+
 ## 0.6.1 / 2015-01-10
 
 * Fixed issue #2 by changing precedence in which extraction accesses
