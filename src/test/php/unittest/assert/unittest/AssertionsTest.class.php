@@ -2,7 +2,6 @@
 
 use unittest\assert\Value;
 use lang\Object;
-use lang\types\String;
 
 class AssertionsTest extends AbstractAssertionsTest {
 
