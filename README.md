@@ -34,19 +34,21 @@ class ExampleTest extends \unittest\TestCase {
 }
 ```
 
-Running this test will yield one succeeded and one failed test. The *big* benefit over the regular unittest messages is that the error message contains *all* failed assertions in a verbose and friendly readable format.
+Running this test will yield one succeeded and one failed test. The difference to regular unittest messages is the more readable format. In the above case, we wrapped the chain in an `All::of()` call which will yield *all* failed assertions, not just the first one.
 
 ```sh
-$ unittest ExampleTest
+$ unittest ExampleTest.class.php
 [.F]
 
-F unittest.TestAssertionFailed(test= ExampleTest::fails, time= 0.001 seconds) {
+F unittest.TestAssertionFailed(test= ExampleTest::fails, time= 0.002 seconds) {
   unittest.AssertionFailedError{ The following 2 assertions have failures:
     1: unittest.AssertionFailedError{ Failed to verify that "localhost" starts with "www" }
     2: unittest.AssertionFailedError{ Failed to verify that "localhost" ends with ".com" }
    }
-    at unittest.assert.Assertions::afterTest() [line 290 of TestSuite.class.php]
-    at unittest.TestSuite::unittest\{closure}() [line 335 of TestSuite.class.php]
+    at unittest.assert.All::of() [line 17 of ExampleTest.class.php]
+    at ExampleTest::fails() [line 0 of StackTraceElement.class.php]
+    at ReflectionMethod::invokeArgs() [line 90 of Method.class.php]
+    at lang.reflect.Method::invoke() [line 334 of TestSuite.class.php]
     at unittest.TestSuite::runInternal() [line 565 of TestSuite.class.php]
     at unittest.TestSuite::run() [line 369 of Runner.class.php]
     at xp.unittest.Runner::run() [line 380 of Runner.class.php]
@@ -55,9 +57,8 @@ F unittest.TestAssertionFailed(test= ExampleTest::fails, time= 0.001 seconds) {
  }
 
 ✗: 2/2 run (0 skipped), 1 succeeded, 1 failed
-Memory used: 1554.39 kB (1626.59 kB peak)
-Time taken: 0.004 seconds
-
+Memory used: 1610.91 kB (1710.45 kB peak)
+Time taken: 0.005 seconds
 ````
 
 Assertions
