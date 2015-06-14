@@ -11,7 +11,7 @@ class Value extends \lang\Object {
 
   static function __import($scope) {
     $assertion= get_called_class();
-    self::$extensions[$assertion]= $assertion::type();
+    self::$extensions[$scope][$assertion]= $assertion::type();
   }
 
   /** @return lang.Type */
@@ -39,12 +39,12 @@ class Value extends \lang\Object {
       return new MapValue($value);
     } else if (is_string($value)) {
       return new StringValue($value);
-    } else {
-      foreach (self::$extensions as $assertion => $type) {
+    } else if (isset(self::$extensions[Assertions::$scope])) {
+      foreach (self::$extensions[Assertions::$scope] as $assertion => $type) {
         if ($type->isInstance($value)) return new $assertion($value);
       }
-      return new Value($value);
     }
+    return new Value($value);
   }
 
   /**

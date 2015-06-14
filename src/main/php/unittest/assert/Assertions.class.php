@@ -14,6 +14,7 @@ class Assertions extends \lang\Object implements TestAction {
   const DECLARATION = '#[@action(new \unittest\assert\Assertions())]';
   const CURRENT = 0;
   protected static $verify= [];
+  public static $scope;
 
   /**
    * Creates a new verification
@@ -38,6 +39,7 @@ class Assertions extends \lang\Object implements TestAction {
    * @throws unittest.AssertionFailedError
    */
   public function beforeTest(TestCase $t) {
+    self::$scope= get_class($t);
     array_unshift(self::$verify, new Vector());
   }
 
@@ -53,5 +55,6 @@ class Assertions extends \lang\Object implements TestAction {
       $value->verify($failed);
     }
     $failed->raiseIf();
+    self::$scope= null;
   }
 }
