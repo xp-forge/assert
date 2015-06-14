@@ -218,19 +218,21 @@ class Value extends \lang\Object {
   /**
    * Extract a given arg
    *
-   * @param  var $arg
+   * @param  string|string[]|function(var): var $arg
    * @return self
    */
   public function extracting($arg) {
-    $extractor= new InstanceExtractor($this->value);
-    if (is_array($arg)) {
+    if ($arg instanceof \Closure) {
+      return self::of($arg($this->value));
+    } else if (is_array($arg)) {
+      $extractor= new InstanceExtractor($this->value);
       $value= [];
       foreach ($arg as $key) {
         $value[]= $extractor->extract($key);
       }
       return self::of($value);
     } else {
-      return self::of($extractor->extract($arg));
+      return self::of((new InstanceExtractor($this->value))->extract($arg));
     }
   }
 }

@@ -52,4 +52,20 @@ class ExtractingTest extends AbstractAssertionsTest {
   public function extracting_from_array($person) {
     $this->assertVerified(Value::of([$person, $person])->extracting('name')->isEqualTo(['Test', 'Test']));
   }
+
+  #[@test]
+  public function extracting_from_instance_via_closure() {
+    $this->assertVerified(Value::of(new Person(1, 'Test', 42, ['name' => 'Test']))
+      ->extracting(function($person) { return $person->name(); })
+      ->isEqualTo('Test')
+    );
+  }
+
+  #[@test]
+  public function extracting_from_map_via_closure() {
+    $this->assertVerified(Value::of(['id' => 1, 'name' => 'Test'])
+      ->extracting(function($person) { return $person['name']; })
+      ->isEqualTo('Test')
+    );
+  }
 }
