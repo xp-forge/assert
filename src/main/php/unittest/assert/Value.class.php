@@ -251,7 +251,7 @@ class Value extends \lang\Object {
   /**
    * Assert a given value is an instance of a given type
    *
-   * @param  var $type
+   * @param  string|lang.Type $type
    * @return self
    */
   public function isInstanceOf($type) {
