@@ -30,6 +30,8 @@ class Value extends \lang\Object {
       return new MapValue($value);
     } else if (is_string($value)) {
       return new StringValue($value);
+    } else if (is_int($value) || is_double($value)) {
+      return new NumericValue($value);
     } else {
       return new Value($value);
     }
@@ -203,6 +205,49 @@ class Value extends \lang\Object {
    */
   public function doesNotContain($element) {
     return $this->is(new NotPossible('does not contain anything'));
+  }
+
+  /**
+   * Assert this value is greater than a given comparison
+   *
+   * @param  int|double $comparison
+   * @return self
+   */
+  public function isGreaterThan($comparison) {
+    return $this->is(new NotPossible('cannot be greater than anything'));
+  }
+
+  /**
+   * Assert this value is less than a given comparison
+   *
+   * @param  int|double $comparison
+   * @return self
+   */
+  public function isLessThan($comparison) {
+    return $this->is(new NotPossible('cannot be less than anything'));
+  }
+
+  /**
+   * Assert this value is between start and end (both included)
+   *
+   * @param  int|double $start
+   * @param  int|double $end
+   * @return self
+   */
+  public function isBetween($start, $end) {
+    return $this->is(new NotPossible('cannot be between anything'));
+  }
+
+  /**
+   * Assert this value is close to a given comparison inside a given tolerance.
+   * If the difference is exactly the tolerance, this assertion is considered valid.
+   *
+   * @param  int|double $comparison
+   * @param  int|double $tolerance
+   * @return self
+   */
+  public function isCloseTo($comparison, $tolerance) {
+    return $this->is(new NotPossible('cannot be close to anything'));
   }
 
   /**
