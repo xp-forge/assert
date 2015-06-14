@@ -10,7 +10,7 @@ class StringValue extends Value {
   }
 
   public function startsWith($string) {
-    $rep= Value::stringOf($string);
+    $rep= self::stringOf($string);
     return $this->is(new Match(
       function($value) use($string) {
         return ('' !== $value && 0 === substr_compare($value, $string, 0, strlen($string)));
@@ -20,7 +20,7 @@ class StringValue extends Value {
   }
 
   public function endsWith($string) {
-    $rep= Value::stringOf($string);
+    $rep= self::stringOf($string);
     return $this->is(new Match(
       function($value) use($string) {
         return ('' !== $value && 0 === substr_compare($value, $string, -strlen($string)));
@@ -30,7 +30,7 @@ class StringValue extends Value {
   }
 
   public function contains($string) {
-    $rep= Value::stringOf($string);
+    $rep= self::stringOf($string);
     return $this->is(new Match(
       function($value) use($string) {
         return false !== strpos($value, $string);
@@ -40,7 +40,7 @@ class StringValue extends Value {
   }
 
   public function doesNotContain($string) {
-    $rep= Value::stringOf($string);
+    $rep= self::stringOf($string);
     return $this->isNot(new Match(
       function($value) use($string) {
         return false !== strpos($value, $string);

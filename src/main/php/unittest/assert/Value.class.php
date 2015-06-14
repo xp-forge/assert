@@ -21,7 +21,7 @@ class Value extends \lang\Object {
    * Creates a value instance from any given value; specializing if necessary.
    *
    * @param  var $value
-   * @return unittest.assert.Value
+   * @return self
    */
   public static function of($value) {
     if (is_array($value) && 0 === key($value)) {
@@ -31,7 +31,7 @@ class Value extends \lang\Object {
     } else if (is_string($value)) {
       return new StringValue($value);
     } else {
-      return new Value($value);
+      return new self($value);
     }
   }
 
