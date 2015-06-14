@@ -1,5 +1,5 @@
-Assertions for the XP Framework
-===============================
+Assertions
+==========
 
 [![Build Status on TravisCI](https://secure.travis-ci.org/xp-forge/assert.svg)](http://travis-ci.org/xp-forge/assert)
 [![XP Framework Mdodule](https://raw.githubusercontent.com/xp-framework/web/master/static/xp-framework-badge.png)](https://github.com/xp-framework/core)
@@ -9,7 +9,7 @@ Assertions for the XP Framework
 [![Supports HHVM 3.4+](https://raw.githubusercontent.com/xp-framework/web/master/static/hhvm-3_4plus.png)](http://hhvm.com/)
 [![Latest Stable Version](https://poser.pugx.org/xp-forge/assert/version.png)](https://packagist.org/packages/xp-forge/assert)
 
-Flexible assertions on top of the XP Framwork's unittest package.
+Flexible assertions on top of the XP Framework's unittest package.
 
 Example
 -------
