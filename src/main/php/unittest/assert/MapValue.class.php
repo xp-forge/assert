@@ -12,7 +12,7 @@ class MapValue extends Value {
   }
 
   public function contains($element) {
-    $rep= self::stringOf($element);
+    $rep= Condition::stringOf($element);
     return $this->is(new Match(
       function($value) use($element) {
         foreach ($this->value as $value) {
@@ -25,7 +25,7 @@ class MapValue extends Value {
   }
 
   public function doesNotContain($element) {
-    $rep= self::stringOf($element);
+    $rep= Condition::stringOf($element);
     return $this->isNot(new Match(
       function($value) use($element) {
         foreach ($this->value as $value) {
@@ -48,14 +48,14 @@ class MapValue extends Value {
       $value= [];
       foreach ($arg as $key) {
         if (!array_key_exists($key, $this->value)) {
-          throw new \lang\IndexOutOfBoundsException('Cannot extract "'.$key.'" from '.self::stringOf($this->value));
+          throw new \lang\IndexOutOfBoundsException('Cannot extract "'.$key.'" from '.Condition::stringOf($this->value));
         }
         $value[]= $this->value[$key];
       }
       return self::of($value);
     } else {
       if (!array_key_exists($arg, $this->value)) {
-        throw new \lang\IndexOutOfBoundsException('Cannot extract "'.$arg.'" from '.self::stringOf($this->value));
+        throw new \lang\IndexOutOfBoundsException('Cannot extract "'.$arg.'" from '.Condition::stringOf($this->value));
       }
       return self::of($this->value[$arg]);
     }

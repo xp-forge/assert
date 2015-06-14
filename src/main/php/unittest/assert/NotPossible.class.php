@@ -12,6 +12,6 @@ class NotPossible extends Condition {
   }
 
   public function describe($value, $positive) {
-    return sprintf(Value::stringOf($value).' '.$this->message);
+    return sprintf(self::stringOf($value).' '.$this->message);
   }
 }

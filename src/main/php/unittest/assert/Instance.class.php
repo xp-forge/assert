@@ -14,7 +14,7 @@ class Instance extends Condition {
   public function describe($value, $positive) {
     return sprintf(
       '%s %s %s', 
-      Value::stringOf($value),
+      self::stringOf($value),
       $positive ? 'is an instance of' : 'is not an instance of',
       $this->type->toString()
     );
