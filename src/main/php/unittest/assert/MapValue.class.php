@@ -55,11 +55,8 @@ class MapValue extends Value {
       return self::of($arg($this->value));
     } else if (is_array($arg)) {
       $value= [];
-      foreach ($arg as $key) {
-        if (!array_key_exists($key, $this->value)) {
-          throw new \lang\IndexOutOfBoundsException('Cannot extract "'.$key.'" from '.Condition::stringOf($this->value));
-        }
-        $value[]= $this->value[$key];
+      foreach ($arg as $key => $extract) {
+        $value[$key]= $this->extracting($extract)->value;
       }
       return self::of($value);
     } else {

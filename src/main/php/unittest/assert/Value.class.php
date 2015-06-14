@@ -268,10 +268,9 @@ class Value extends \lang\Object {
     if ($arg instanceof \Closure) {
       return self::of($arg($this->value));
     } else if (is_array($arg)) {
-      $extractor= new InstanceExtractor($this->value);
       $value= [];
-      foreach ($arg as $key) {
-        $value[]= $extractor->extract($key);
+      foreach ($arg as $key => $extract) {
+        $value[$key]= $this->extracting($extract)->value;
       }
       return self::of($value);
     } else {

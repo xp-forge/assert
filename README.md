@@ -91,6 +91,13 @@ $person= ['id' => 6100, 'name' => 'Test', 'age' => 42];
 Assert::that($person)->extracting(['name', 'age'])->isEqualTo(['Test', 42]);
 ```
 
+Passing a mao to `extracting()` will extract multiple elements and return them in a map.
+
+```php
+$person= ['id' => 6100, 'name' => 'Test', 'age' => 42];
+Assert::that($person)->extracting(['identifier' => 'id'])->isEqualTo(['identifier' => 6100]);
+```
+
 For arrays, the `extracting()` method applies the extraction on every element:
 
 ```php

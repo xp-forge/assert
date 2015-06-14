@@ -3,6 +3,9 @@ Data sequences change log
 
 ## ?.?.? / ????-??-??
 
+* Added possibility to name elements in `extracting()` by passing
+  a map instead of an array.
+  (@thekid)
 * Made it possible to supply closures to `extracting()`. See PR #6
   (@thekid)
 * Added `isEmpty()` assertion for strings, arrays and maps. See PR #5

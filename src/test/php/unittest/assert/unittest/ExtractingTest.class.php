@@ -44,6 +44,11 @@ class ExtractingTest extends AbstractAssertionsTest {
   }
 
   #[@test, @values('people')]
+  public function extracting_by_name($person) {
+    $this->assertVerified(Value::of($person)->extracting(['key' => 'id'])->isEqualTo(['key' => 1]));
+  }
+
+  #[@test, @values('people')]
   public function extracting_chained($person) {
     $this->assertVerified(Value::of($person)->extracting('department')->extracting('name')->isEqualTo('Test'));
   }
@@ -66,6 +71,14 @@ class ExtractingTest extends AbstractAssertionsTest {
     $this->assertVerified(Value::of(['id' => 1, 'name' => 'Test'])
       ->extracting(function($person) { return $person['name']; })
       ->isEqualTo('Test')
+    );
+  }
+
+  #[@test]
+  public function extracting_from_map_via_array_of_string_and_closure() {
+    $this->assertVerified(Value::of(['id' => 1, 'name' => 'Test'])
+      ->extracting([function($person) { return $person['name']; }, 'id'])
+      ->isEqualTo(['Test', 1])
     );
   }
 }
