@@ -1,11 +1,20 @@
 <?php namespace unittest\assert\unittest;
 
 use unittest\assert\AssertionsFailed;
+use unittest\assert\Assertions;
 use unittest\AssertionFailedError;
 use unittest\FormattedMessage;
 use util\Objects;
 
 abstract class AbstractAssertionsTest extends \unittest\TestCase {
+
+  public function setUp() {
+    $this->failed= Assertions::enter(new AssertionsFailed());
+  }
+
+  public function tearDown() {
+    Assertions::leave();
+  }
 
   /**
    * Assertion helpeer
@@ -16,7 +25,7 @@ abstract class AbstractAssertionsTest extends \unittest\TestCase {
    */
   protected function assertUnverified($patterns, $assert) {
     $messages= new AssertionsFailed();
-    $failures= $assert->verify(new AssertionsFailed())->failures();
+    $failures= $this->failed->failures();
     if (sizeof($failures) !== sizeof($patterns)) {
       $messages->add(new AssertionFailedError(new FormattedMessage(
         'Expected %d failures but have %d: %s',
@@ -42,7 +51,7 @@ abstract class AbstractAssertionsTest extends \unittest\TestCase {
    * @throws unittest.AssertionFailedError
    */
   protected function assertVerified($assert) {
-    $this->assertEquals(AssertionsFailed::$EMPTY, $assert->verify(new AssertionsFailed()));
+    $this->assertTrue($this->failed->isEmpty());
   }
 
   /** @return var[][] */

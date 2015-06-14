@@ -16,9 +16,8 @@ Example
 
 ```php
 use unittest\assert\Assert;
-use unittest\assert\Assertions;
+use unittest\assert\All;
 
-#[@action(new Assertions())]
 class ExampleTest extends \unittest\TestCase {
 
   #[@test]
@@ -28,7 +27,9 @@ class ExampleTest extends \unittest\TestCase {
 
   #[@test]
   public function fails() {
-    Assert::that('localhost')->startsWith('www')->endsWith('.com');
+    All::of(function() { 
+      Assert::that('localhost')->startsWith('www')->endsWith('.com');
+    });
   }
 }
 ```

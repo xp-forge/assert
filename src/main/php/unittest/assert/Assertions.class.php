@@ -11,24 +11,38 @@ use unittest\AssertionFailedError;
  * `Assert::that()` method in.
  */
 class Assertions extends \lang\Object implements TestAction {
-  const DECLARATION = '#[@action(new \unittest\assert\Assertions())]';
   const CURRENT = 0;
   protected static $verify= [];
 
   /**
-   * Creates a new verification
+   * Enters context
    *
-   * @param  unittest.assert.Value $value
-   * @return unittest.assert.Value
-   * @throws lang.IllegalStateException
+   * @param  var $context
+   * @return var The given context
    */
-  public static function verifyThat($value) {
-    if (self::$verify) {
-      self::$verify[self::CURRENT]->add($value);
-      return $value;
+  public static function enter($context) {
+    array_unshift(self::$verify, $context);
+    return $context;
+  }
+
+  public static function verify($condition) {
+    $error= $condition();
+    if (null === $error) {
+      return;
+    } else if (self::$verify) {
+      self::$verify[self::CURRENT]->add($error);
     } else {
-      throw new IllegalStateException('You need to decorate your unittest class with '.self::DECLARATION);
+      throw $error;
     }
+  }
+
+  /**
+   * Leaves context
+   *
+   * @return var
+   */
+  public static function leave() {
+    return array_shift(self::$verify);
   }
 
   /**
@@ -38,7 +52,7 @@ class Assertions extends \lang\Object implements TestAction {
    * @throws unittest.AssertionFailedError
    */
   public function beforeTest(TestCase $t) {
-    array_unshift(self::$verify, new Vector());
+    // NOOP for BC
   }
 
   /**
@@ -48,10 +62,6 @@ class Assertions extends \lang\Object implements TestAction {
    * @throws unittest.AssertionFailedError
    */
   public function afterTest(TestCase $t) {
-    $failed= new AssertionsFailed();
-    foreach (array_shift(self::$verify) as $value) {
-      $value->verify($failed);
-    }
-    $failed->raiseIf();
+    // NOOP for BC
   }
 }

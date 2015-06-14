@@ -5,7 +5,6 @@ use unittest\AssertionFailedError;
 
 class Value extends \lang\Object {
   protected $value;
-  protected $verify= [];
 
   /**
    * Creates a new instance
@@ -37,30 +36,19 @@ class Value extends \lang\Object {
   }
 
   /**
-   * Verify this assertion
-   *
-   * @param  unittest.assert.AssertionsFailed $failed
-   * @return unittest.assert.AssertionsFailed $failed
-   */
-  public function verify(AssertionsFailed $failed) {
-    foreach ($this->verify as $verify) {
-      $verify($failed);
-    }
-    return $failed;
-  }
-
-  /**
    * Assert a given condition matches this value
    * 
    * @param  unittest.assert.Condition $condition
    * @return self
    */
   public function is(Condition $condition) {
-    $this->verify[]= function($failed) use($condition) {
-      if (!$condition->matches($this->value)) {
-        $failed->add(new AssertionFailedError('Failed to verify that '.$condition->describe($this->value, true)));
+    Assertions::verify(function() use($condition) {
+      if ($condition->matches($this->value)) {
+        return null;
+      } else {
+        return new AssertionFailedError('Failed to verify that '.$condition->describe($this->value, true));
       }
-    };
+    });
     return $this;
   }
 
@@ -71,11 +59,13 @@ class Value extends \lang\Object {
    * @return self
    */
   public function isNot(Condition $condition) {
-    $this->verify[]= function($failed) use($condition) {
+    Assertions::verify(function() use($condition) {
       if ($condition->matches($this->value)) {
-        $failed->add(new AssertionFailedError('Failed to verify that '.$condition->describe($this->value, false)));
+        return new AssertionFailedError('Failed to verify that '.$condition->describe($this->value, false));
+      } else {
+        return null;
       }
-    };
+    });
     return $this;
   }
 
