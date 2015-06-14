@@ -43,7 +43,7 @@ class AssertionsFailed extends \lang\Object {
         foreach ($this->failures as $i => $failures) {
           $list.= '  '.($i + 1).': '.$failures->compoundMessage()."\n";
         }
-        throw new AssertionfailuresError(new FormattedMessage(
+        throw new AssertionfailedError(new FormattedMessage(
           "The following %d assertions failures:\n%s",
           [$i + 1, $list]
         ));
