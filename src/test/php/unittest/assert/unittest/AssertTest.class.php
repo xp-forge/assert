@@ -3,6 +3,7 @@
 use unittest\assert\Assert;
 use unittest\assert\All;
 use unittest\AssertionFailedError;
+use lang\IllegalStateException;
 
 class AssertTest extends \unittest\TestCase {
 
@@ -39,6 +40,20 @@ class AssertTest extends \unittest\TestCase {
         Assert::that('')->isEmpty();
         Assert::that('Test')->startsWith('not');
         Assert::that('e')->isEmpty();
+      });
+    } catch (AssertionFailedError $expected) {
+      return;
+    }
+    $this->fail('Must have raised an exception', null, 'unittest.AssertionFailedError');
+  }
+
+  #[@test]
+  public function even_inside_allof_execution_stops_at_first_failure() {
+    try {
+      All::of(function() {
+        Assert::that('Hello')->isEmpty()->is(newinstance('unittest.assert.Condition', [], [
+          'matches' => function($value) { throw new IllegalStateException('Unreachable'); }
+        ]));
       });
     } catch (AssertionFailedError $expected) {
       return;

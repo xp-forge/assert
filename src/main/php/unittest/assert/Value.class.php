@@ -5,6 +5,7 @@ use unittest\AssertionFailedError;
 
 class Value extends \lang\Object {
   protected $value;
+  protected $failed;
 
   /**
    * Creates a new instance
@@ -42,10 +43,11 @@ class Value extends \lang\Object {
    * @return self
    */
   public function is(Condition $condition) {
-    Assertions::verify(function() use($condition) {
+    $this->failed || Assertions::verify(function() use($condition) {
       if ($condition->matches($this->value)) {
         return null;
       } else {
+        $this->failed= true;
         return new AssertionFailedError('Failed to verify that '.$condition->describe($this->value, true));
       }
     });
@@ -59,8 +61,9 @@ class Value extends \lang\Object {
    * @return self
    */
   public function isNot(Condition $condition) {
-    Assertions::verify(function() use($condition) {
+    $this->failed || Assertions::verify(function() use($condition) {
       if ($condition->matches($this->value)) {
+        $this->failed= true;
         return new AssertionFailedError('Failed to verify that '.$condition->describe($this->value, false));
       } else {
         return null;
