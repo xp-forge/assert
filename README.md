@@ -66,11 +66,11 @@ Values can be transformed prior to invoking assertions on them.
 Extraction works directly on instances (using properties and `get`-prefixed as well as plain getters) and maps (via string keys).
 
 ```php
-$person= new Person(0xD00D, 'The Dude');
-Assert::that($person)->extracting('name')->isEqualTo('The Dude');
+$tim= new Person(6100, 'Tim Tailor');
+Assert::that($tim)->extracting('name')->isEqualTo('Tim Tailor');
 
-$person= new Person(6100, 'Tim Tailor');
-Assert::that($person)->extracting(function($p) { return $p->name(); })->isEqualTo('Tim Tailor');
+$tim= new Person(6100, 'Tim Tailor');
+Assert::that($tim)->extracting(function($p) { return $p->name(); })->isEqualTo('Tim Tailor');
 
 $person= ['id' => 6100, 'name' => 'Test', 'age' => 42];
 Assert::that($person)->extracting(['name', 'age'])->isEqualTo(['Test', 42]);
