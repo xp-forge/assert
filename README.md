@@ -22,11 +22,42 @@ use unittest\assert\Assertions;
 class ExampleTest extends \unittest\TestCase {
 
   #[@test]
-  public function example() {
+  public function succeeds() {
     Assert::that(['The Dude'])->hasSize(1)->contains('The Dude');
+  }
+
+  #[@test]
+  public function fails() {
+    Assert::that('localhost')->startsWith('www')->endsWith('.com');
   }
 }
 ```
+
+Running this test will yield one succeeded and one failed test. The *big* benefit over the regular unittest messages is that the error message contains *all* failed assertions in a verbose and friendly readable format.
+
+```sh
+$ unittest ExampleTest
+[.F]
+
+F unittest.TestAssertionFailed(test= ExampleTest::fails, time= 0.001 seconds) {
+  unittest.AssertionFailedError{ The following 2 assertions failures:
+    1: unittest.AssertionFailedError{ Failed to verify that "localhost" starts with "www" }
+    2: unittest.AssertionFailedError{ Failed to verify that "localhost" ends with ".com" }
+   }
+    at unittest.assert.Assertions::afterTest() [line 290 of TestSuite.class.php]
+    at unittest.TestSuite::unittest\{closure}() [line 335 of TestSuite.class.php]
+    at unittest.TestSuite::runInternal() [line 565 of TestSuite.class.php]
+    at unittest.TestSuite::run() [line 369 of Runner.class.php]
+    at xp.unittest.Runner::run() [line 380 of Runner.class.php]
+    at xp.unittest.Runner::main() [line 281 of class-main.php]
+
+ }
+
+✗: 2/2 run (0 skipped), 1 succeeded, 1 failed
+Memory used: 1554.39 kB (1626.59 kB peak)
+Time taken: 0.004 seconds
+
+````
 
 Assertions
 ----------
