@@ -3,7 +3,10 @@ Data sequences change log
 
 ## ?.?.? / ????-??-??
 
+## 0.7.0 / 2015-06-14
+
 * **Heads up: Removed support for lang.types wrapper types** - @thekid
+* Added forward compatibility with PHP7 - @thekid
 
 ## 0.6.2 / 2015-02-12
 
