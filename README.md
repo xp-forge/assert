@@ -61,6 +61,9 @@ Extraction works directly on instances (using properties and `get`-prefixed as w
 $person= new Person(0xD00D, 'The Dude');
 Assert::that($person)->extracting('name')->isEqualTo('The Dude');
 
+$person= new Person(6100, 'Tim Tailor');
+Assert::that($person)->extracting(function($p) { return $p->name(); })->isEqualTo('Tim Tailor');
+
 $person= ['id' => 6100, 'name' => 'Test', 'age' => 42];
 Assert::that($person)->extracting(['name', 'age'])->isEqualTo(['Test', 42]);
 ```
