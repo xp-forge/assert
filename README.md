@@ -28,7 +28,8 @@ class ExampleTest extends \unittest\TestCase {
   #[@test]
   public function fails() {
     All::of(function() { 
-      Assert::that('localhost')->startsWith('www')->endsWith('.com');
+      Assert::that('localhost')->startsWith('www');
+      Assert::that('example.com')->endsWith('.org');
     });
   }
 }
@@ -43,7 +44,7 @@ $ unittest ExampleTest.class.php
 F unittest.TestAssertionFailed(test= ExampleTest::fails, time= 0.002 seconds) {
   unittest.AssertionFailedError{ The following 2 assertions have failures:
     1: unittest.AssertionFailedError{ Failed to verify that "localhost" starts with "www" }
-    2: unittest.AssertionFailedError{ Failed to verify that "localhost" ends with ".com" }
+    2: unittest.AssertionFailedError{ Failed to verify that "example.com" ends with ".org" }
    }
     at unittest.assert.All::of() [line 17 of ExampleTest.class.php]
     at ExampleTest::fails() [line 0 of StackTraceElement.class.php]
