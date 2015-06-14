@@ -31,6 +31,19 @@ class StringAssertionsTest extends TypeAssertionsTest {
     ]);
   }
 
+  #[@test]
+  public function verify_is_empty() {
+    $this->assertVerified(Value::of('')->isEmpty());
+  }
+
+  #[@test, @values('stringsContainingTest')]
+  public function is_empty($value) {
+    $this->assertUnverified(
+      ['/Failed to verify that .+ is empty/'],
+      Value::of($value)->isEmpty()
+    );
+  }
+
   #[@test, @values([[0, ''], [4, 'test']])]
   public function hasSize($size, $value) {
     $this->assertVerified(Value::of($value)->hasSize($size));

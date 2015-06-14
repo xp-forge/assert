@@ -8,6 +8,19 @@ class ArrayAssertionsTest extends TypeAssertionsTest {
   /** @return var[][] */
   protected function typeFixtures() { return [[['Fixture']]]; }
 
+  #[@test]
+  public function verify_is_empty() {
+    $this->assertVerified(Value::of([])->isEmpty());
+  }
+
+  #[@test, @values([[[1]], [[1, 2]]])]
+  public function is_empty($value) {
+    $this->assertUnverified(
+      ['/Failed to verify that .+ is empty/ms'],
+      Value::of($value)->isEmpty()
+    );
+  }
+
   #[@test, @values([[[]], [[1]], [[1, 2]]])]
   public function array_has_size($value) {
     $this->assertVerified(Value::of($value)->hasSize(sizeof($value)));

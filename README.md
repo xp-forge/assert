@@ -45,6 +45,7 @@ Generic assertions:
 
 With special meanings dependant on type:
 
+* `isEmpty()` - Asserts a string, array or map is empty
 * `hasSize(int $size)` - Asserts a string length, array or map size
 * `startsWith(var $element)` - Asserts a string or array contains the given element at its start
 * `endsWith(var $element)` - Asserts a string or array contains the given element at its end

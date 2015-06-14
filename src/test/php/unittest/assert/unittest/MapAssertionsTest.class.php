@@ -32,6 +32,19 @@ class MapAssertionsTest extends TypeAssertionsTest {
     return array_merge($this->mapsNotContainingTest(), $this->mapsContainingTest());
   }
 
+  #[@test]
+  public function verify_is_empty() {
+    $this->assertVerified(Value::of([])->isEmpty());
+  }
+
+  #[@test, @values('mapsContainingTest')]
+  public function is_empty($value) {
+    $this->assertUnverified(
+      ['/Failed to verify that .+ is empty/ms'],
+      Value::of($value)->isEmpty()
+    );
+  }
+
   #[@test, @values('allMaps')]
   public function verify_has_size($value) {
     $this->assertVerified(Value::of($value)->hasSize(sizeof($value)));
