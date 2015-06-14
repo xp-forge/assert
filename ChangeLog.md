@@ -3,6 +3,16 @@ Data sequences change log
 
 ## ?.?.? / ????-??-??
 
+## 0.8.0 / 2015-06-15
+
+* **Heads up: Competely rewrote inner workings**
+  Most important, the first assertion failing will trigger a failure.
+  For cases when we want all assertions to be executed, we now need to 
+  wrap them in a function and pass that to `All::of()`. This way, we do
+  not need the `#[@action(new Assertions())]` anymore!
+  (@thekid)
+* Renamed all *Value* classes are now called *Assertions*
+  (@thekid)
 * Added possibility to name elements in `extracting()` by passing
   a map instead of an array.
   (@thekid)
