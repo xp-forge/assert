@@ -6,14 +6,14 @@ class MapValue extends Value {
 
   public function hasSize($size) {
     return $this->is(new Match(
-      function($value) use($size) { return sizeof($this->value) === $size; },
+      function($value) use($size) { return sizeof($value) === $size; },
       ['%s does not have a size of '.$size, '%s has a size of '.$size]
     ));
   }
 
   public function isEmpty() {
     return $this->is(new Match(
-      function($value) { return empty($this->value); },
+      function($value) { return empty($value); },
       ['%s is not empty', '%s is empty']
     ));
   }
@@ -22,7 +22,7 @@ class MapValue extends Value {
     $rep= Condition::stringOf($element);
     return $this->is(new Match(
       function($value) use($element) {
-        foreach ($this->value as $value) {
+        foreach ($value as $value) {
           if ($value === $element) return true;
         }
         return false;
@@ -35,7 +35,7 @@ class MapValue extends Value {
     $rep= Condition::stringOf($element);
     return $this->isNot(new Match(
       function($value) use($element) {
-        foreach ($this->value as $value) {
+        foreach ($value as $value) {
           if ($value === $element) return true;
         }
         return false;
