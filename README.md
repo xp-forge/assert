@@ -19,7 +19,7 @@ use unittest\assert\Assert;
 use unittest\assert\Assertions;
 
 #[@action(new Assertions())]
-class ExampleTest extends AbstractAssertionsTest {
+class ExampleTest extends \unittest\TestCase {
 
   #[@test]
   public function example() {
