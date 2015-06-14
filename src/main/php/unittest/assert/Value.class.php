@@ -3,9 +3,6 @@
 use lang\Type;
 use util\Objects;
 use unittest\AssertionFailedError;
-use lang\types\ArrayList;
-use lang\types\ArrayMap;
-use lang\types\String;
 
 class Value extends \lang\Object {
   protected $value;
@@ -33,12 +30,6 @@ class Value extends \lang\Object {
       return new MapPrimitiveValue($value);
     } else if (is_string($value)) {
       return new StringPrimitiveValue($value);
-    } else if ($value instanceof ArrayList) {
-      return new ArrayValue($value);
-    } else if ($value instanceof ArrayMap) {
-      return new MapValue($value);
-    } else if ($value instanceof String) {
-      return new StringValue($value);
     } else {
       return new Value($value);
     }

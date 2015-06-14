@@ -1,54 +1,37 @@
 <?php namespace unittest\assert\unittest;
 
 use unittest\assert\Value;
-use lang\types\String;
 
 class StringAssertionsTest extends TypeAssertionsTest {
 
   /** @return var[][] */
   protected function typeFixtures() {
-    return [
-      ['Fixture'],
-      [new String('Test')]
-    ];
+    return [['Fixture']];
   }
 
   /** @return var[][] */
   protected function stringsStartingWithTest() {
-    return [
-      ['Test'], ['Testing'], ['Test 1'],
-      [new String('Test')], [new String('Testing')], [new String('Test 1')]
-    ];
+    return [['Test'], ['Testing'], ['Test 1']];
   }
 
   /** @return var[][] */
   protected function stringsEndingWithTest() {
-    return [
-      ['Test'], ['A Test'], ['UnitTest'],
-      [new String('Test')], [new String('A Test')], [new String('UnitTest')]
-    ];
+    return [['Test'], ['A Test'], ['UnitTest']];
   }
 
   /** @return var[][] */
   protected function stringsNotContainingTest() {
-    return [
-      [''], ['test'],
-      [new String('')], [new String('test')]
-    ];
+    return [[''], ['test']];
   }
 
   /** @return var[][] */
   protected function stringsContainingTest() {
     return array_merge($this->stringsStartingWithTest(), $this->stringsEndingWithTest(), [
       ['The Test of everything'],
-      [new String('The Test of everything')]
     ]);
   }
 
-  #[@test, @values([
-  #  [0, ''], [4, 'test'],
-  #  [0, new String('')], [4, new String('test')]
-  #])]
+  #[@test, @values([[0, ''], [4, 'test']])]
   public function hasSize($size, $value) {
     $this->assertVerified(Value::of($value)->hasSize($size));
   }

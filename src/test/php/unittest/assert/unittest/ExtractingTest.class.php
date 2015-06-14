@@ -1,7 +1,6 @@
 <?php namespace unittest\assert\unittest;
 
 use unittest\assert\Value;
-use lang\types\ArrayMap;
 
 /**
  * Tests `extracting()` method.
@@ -12,7 +11,6 @@ class ExtractingTest extends AbstractAssertionsTest {
   protected function people() {
     return [
       [['id' => 1, 'name' => 'Test', 'age' => 42, 'department' => ['name' => 'Test']]],
-      [new ArrayMap(['id' => 1, 'name' => 'Test', 'age' => 42, 'department' => ['name' => 'Test']])],
       [newinstance('lang.Object', [], [
         'id'            => 1,
         'name'          => 'Test',

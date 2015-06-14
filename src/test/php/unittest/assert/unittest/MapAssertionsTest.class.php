@@ -2,31 +2,28 @@
 
 use unittest\assert\Value;
 use lang\Object;
-use lang\types\ArrayMap;
 
 class MapAssertionsTest extends TypeAssertionsTest {
 
   /** @return var[][] */
   protected function typeFixtures() {
-    return [
-      [new ArrayMap([])]
-    ];
+    return [[[]]];
   }
 
   /** @return var[][] */
   protected function mapsNotContainingTest() {
     return [
-      [new ArrayMap([])],
-      [new ArrayMap(['color' => 'green'])],
-      [new ArrayMap(['color' => 'green', 'price' => 12.99])]
+      [[]],
+      [['color' => 'green']],
+      [['color' => 'green', 'price' => 12.99]]
     ];
   }
 
   /** @return var[][] */
   protected function mapsContainingTest() {
     return [
-      [new ArrayMap(['color' => 'test'])],
-      [new ArrayMap(['color' => 'test', 'price' => 12.99])]
+      [['color' => 'test']],
+      [['color' => 'test', 'price' => 12.99]]
     ];
   }
 
@@ -37,13 +34,13 @@ class MapAssertionsTest extends TypeAssertionsTest {
 
   #[@test, @values('allMaps')]
   public function verify_has_size($value) {
-    $this->assertVerified(Value::of($value)->hasSize($value->size));
+    $this->assertVerified(Value::of($value)->hasSize(sizeof($value)));
   }
 
   #[@test, @values('allMaps')]
   public function has_size($value) {
     $this->assertUnverified(
-      ['/Failed to verify that lang.types.ArrayMap.+ has a size of 7/'],
+      ['/Failed to verify that .+ has a size of 7/ms'],
       Value::of($value)->hasSize(7)
     );
   }
@@ -56,7 +53,7 @@ class MapAssertionsTest extends TypeAssertionsTest {
   #[@test, @values('mapsNotContainingTest')]
   public function contains_test($value) {
     $this->assertUnverified(
-      ['/Failed to verify that lang.types.ArrayMap.+ contains "test"/'],
+      ['/Failed to verify that .+ contains "test"/ms'],
       Value::of($value)->contains('test')
     );
   }
@@ -69,7 +66,7 @@ class MapAssertionsTest extends TypeAssertionsTest {
   #[@test, @values('mapsContainingTest')]
   public function does_not_contains_test($value) {
     $this->assertUnverified(
-      ['/Failed to verify that lang.types.ArrayMap.+ does not contain "test"/'],
+      ['/Failed to verify that .+ does not contain "test"/ms'],
       Value::of($value)->doesNotContain('test')
     );
   }

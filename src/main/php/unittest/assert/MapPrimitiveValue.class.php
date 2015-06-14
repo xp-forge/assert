@@ -7,7 +7,7 @@ class MapPrimitiveValue extends Value {
   public function hasSize($size) {
     return $this->is(new Match(
       function($value) use($size) { return sizeof($this->value) === $size; },
-      ['%s does not have a length of '.$size, '%s has a size of '.$size]
+      ['%s does not have a size of '.$size, '%s has a size of '.$size]
     ));
   }
 
