@@ -3,14 +3,13 @@
 use lang\IllegalStateException;
 use util\collections\Vector;
 use unittest\TestCase;
-use unittest\TestAction;
 use unittest\AssertionFailedError;
 
 /**
  * Use this assertions action to decorate any class you wish to use the
  * `Assert::that()` method in.
  */
-class Assertions extends \lang\Object implements TestAction {
+class Assertions extends \lang\Object {
   const CURRENT = 0;
   protected static $verify= [];
 
@@ -43,25 +42,5 @@ class Assertions extends \lang\Object implements TestAction {
    */
   public static function leave() {
     return array_shift(self::$verify);
-  }
-
-  /**
-   * Runs before a given test
-   *
-   * @param  unittest.TestCase $t
-   * @throws unittest.AssertionFailedError
-   */
-  public function beforeTest(TestCase $t) {
-    // NOOP for BC
-  }
-
-  /**
-   * Runs after a given test
-   *
-   * @param  unittest.TestCase $t
-   * @throws unittest.AssertionFailedError
-   */
-  public function afterTest(TestCase $t) {
-    // NOOP for BC
   }
 }
