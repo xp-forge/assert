@@ -40,7 +40,7 @@ $ unittest ExampleTest
 [.F]
 
 F unittest.TestAssertionFailed(test= ExampleTest::fails, time= 0.001 seconds) {
-  unittest.AssertionFailedError{ The following 2 assertions failures:
+  unittest.AssertionFailedError{ The following 2 assertions have failures:
     1: unittest.AssertionFailedError{ Failed to verify that "localhost" starts with "www" }
     2: unittest.AssertionFailedError{ Failed to verify that "localhost" ends with ".com" }
    }

@@ -44,7 +44,7 @@ class AssertionsFailed extends \lang\Object {
           $list.= '  '.($i + 1).': '.$failures->compoundMessage()."\n";
         }
         throw new AssertionfailedError(new FormattedMessage(
-          "The following %d assertions failures:\n%s",
+          "The following %d assertions have failures:\n%s",
           [$i + 1, $list]
         ));
       }
