@@ -2,12 +2,19 @@
 
 use lang\Throwable;
 
-class All extends \lang\Object {
+abstract class All extends \lang\Object {
 
-  public static function of($func) {
+  /**
+   * Runs all assertions in the block
+   *
+   * @param  function(): void $block
+   * @return void
+   * @throws unittest.AssertionFailedError
+   */
+  public static function of($block) {
     Assertions::enter(new AssertionsFailed());
     try {
-      $func();
+      $block();
       Assertions::leave()->raiseIf();
     } catch (Throwable $e) {
       Assertions::leave();
