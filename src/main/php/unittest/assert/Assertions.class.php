@@ -1,14 +1,5 @@
 <?php namespace unittest\assert;
 
-use lang\IllegalStateException;
-use util\collections\Vector;
-use unittest\TestCase;
-use unittest\AssertionFailedError;
-
-/**
- * Use this assertions action to decorate any class you wish to use the
- * `Assert::that()` method in.
- */
 class Assertions extends \lang\Object {
   const CURRENT = 0;
   protected static $verify= [];
