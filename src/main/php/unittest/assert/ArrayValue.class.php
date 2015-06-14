@@ -67,7 +67,7 @@ class ArrayValue extends Value {
   /**
    * Extract a given arg
    *
-   * @param  var $arg
+   * @param  string|string[]|function(var): var $arg
    * @return self
    */
   public function extracting($arg) {

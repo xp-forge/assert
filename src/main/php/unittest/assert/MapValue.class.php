@@ -47,11 +47,13 @@ class MapValue extends Value {
   /**
    * Extract a given arg
    *
-   * @param  var $arg
+   * @param  string|string[]|function(var): var $arg
    * @return self
    */
   public function extracting($arg) {
-    if (is_array($arg)) {
+    if ($arg instanceof \Closure) {
+      return self::of($arg($this->value));
+    } else if (is_array($arg)) {
       $value= [];
       foreach ($arg as $key) {
         if (!array_key_exists($key, $this->value)) {
