@@ -6,6 +6,15 @@ use unittest\AssertionFailedError;
 class Value extends \lang\Object {
   protected $value;
   protected $verify= [];
+  protected static $extensions= [];
+
+  static function __import($scope) {
+    $assertion= get_called_class();
+    self::$extensions[$scope][$assertion]= $assertion::type();
+  }
+
+  /** @return lang.Type */
+  protected static function type() { return Type::$VAR; }
 
   /**
    * Creates a new instance
@@ -29,9 +38,12 @@ class Value extends \lang\Object {
       return new MapValue($value);
     } else if (is_string($value)) {
       return new StringValue($value);
-    } else {
-      return new self($value);
+    } else if (isset(self::$extensions[Assertions::$scope])) {
+      foreach (self::$extensions[Assertions::$scope] as $assertion => $type) {
+        if ($type->isInstance($value)) return new $assertion($value);
+      }
     }
+    return new self($value);
   }
 
   /**
