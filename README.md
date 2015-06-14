@@ -63,15 +63,30 @@ Transformations
 ---------------
 Values can be transformed prior to invoking assertions on them.
 
-Extraction works directly on instances (using properties and `get`-prefixed as well as plain getters) and maps (via string keys).
+Extraction works directly on instances (using properties and `get`-prefixed as well as plain getters):
 
 ```php
 $tim= new Person(6100, 'Tim Tailor');
 Assert::that($tim)->extracting('name')->isEqualTo('Tim Tailor');
+```
 
+You can also pass a closure to control more precisely what's extracted:
+
+```php
 $tim= new Person(6100, 'Tim Tailor');
 Assert::that($tim)->extracting(function($p) { return $p->name(); })->isEqualTo('Tim Tailor');
+```
 
+For maps, extraction accesses the elements by their string keys:
+
+```php
+$person= ['id' => 6100, 'name' => 'Test', 'age' => 42];
+Assert::that($person)->extracting('age')->isEqualTo(42);
+```
+
+Passing an array to `extracting()` will extract multiple elements and return them in an array in the order they're passed:
+
+```php
 $person= ['id' => 6100, 'name' => 'Test', 'age' => 42];
 Assert::that($person)->extracting(['name', 'age'])->isEqualTo(['Test', 42]);
 ```
