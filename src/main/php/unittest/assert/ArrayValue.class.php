@@ -11,6 +11,13 @@ class ArrayValue extends Value {
     ));
   }
 
+  public function isEmpty() {
+    return $this->is(new Match(
+      function($value) { return empty($this->value); },
+      ['%s is not empty', '%s is empty']
+    ));
+  }
+
   public function contains($element) {
     $rep= Value::stringOf($element);
     return $this->is(new Match(

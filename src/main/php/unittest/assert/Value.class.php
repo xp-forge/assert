@@ -156,6 +156,15 @@ class Value extends \lang\Object {
   }
 
   /**
+   * Assert this value is empty
+   *
+   * @return self
+   */
+  public function isEmpty() {
+    return $this->is(new NotPossible('is empty'));
+  }
+
+  /**
    * Assert this value has a given size
    * 
    * @param  int $size
