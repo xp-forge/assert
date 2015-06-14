@@ -1,7 +1,6 @@
 <?php namespace unittest\assert;
 
 use lang\Type;
-use util\Objects;
 use unittest\AssertionFailedError;
 
 class Value extends \lang\Object {
@@ -45,16 +44,6 @@ class Value extends \lang\Object {
       }
     }
     return new self($value);
-  }
-
-  /**
-   * Creates a string representation of any given value.
-   *
-   * @param  var $value
-   * @return string
-   */
-  public static function stringOf($value) {
-    return null === $value ? 'null' : Objects::stringOf($value);
   }
 
   /**

@@ -13,6 +13,16 @@ abstract class Condition extends \lang\Object {
   public abstract function matches($value);
 
   /**
+   * Creates a string representation of any given value.
+   *
+   * @param  var $value
+   * @return string
+   */
+  public static function stringOf($value) {
+    return null === $value ? 'null' : Objects::stringOf($value);
+  }
+
+  /**
    * Describe this condition using a given value
    *
    * @param  var $value
@@ -20,6 +30,6 @@ abstract class Condition extends \lang\Object {
    * @return string
    */
   public function describe($value, $positive) {
-    return Value::stringOf($value).' '.($positive ? 'matches' : 'does not match');
+    return self::stringOf($value).' '.($positive ? 'matches' : 'does not match');
   }
 }

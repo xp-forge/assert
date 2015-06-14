@@ -34,6 +34,6 @@ class InstanceExtractor extends \lang\Object {
     if (property_exists($this->value, $key)) {
       return $this->value->{$key};
     }
-    throw new IndexOutOfBoundsException('Cannot extract "'.$key.'" from '.Value::stringOf($this->value));
+    throw new IndexOutOfBoundsException('Cannot extract "'.$key.'" from '.Condition::stringOf($this->value));
   }
 }

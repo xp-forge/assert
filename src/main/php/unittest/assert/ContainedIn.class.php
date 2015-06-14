@@ -17,9 +17,9 @@ class ContainedIn extends Condition {
   public function describe($value, $positive) {
     return sprintf(
       '%s %s %s', 
-      Value::stringOf($value),
+      self::stringOf($value),
       $positive ? 'is contained in' : 'is not contained in',
-      Value::stringOf($this->enumerable)
+      self::stringOf($this->enumerable)
     );
   }
 }
