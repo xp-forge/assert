@@ -57,13 +57,13 @@ class Assertions extends \lang\Object {
    */
   public static function of($value) {
     if (is_array($value) && 0 === key($value)) {
-      return new ArrayValue($value);
+      return new ArrayAssertions($value);
     } else if (is_array($value)) {
-      return new MapValue($value);
+      return new MapAssertions($value);
     } else if (is_string($value)) {
-      return new StringValue($value);
+      return new StringAssertions($value);
     } else if (is_int($value) || is_double($value)) {
-      return new NumericValue($value);
+      return new NumberAssertions($value);
     } else {
       return new self($value);
     }

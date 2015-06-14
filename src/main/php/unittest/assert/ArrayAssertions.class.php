@@ -2,7 +2,7 @@
 
 use util\Objects;
 
-class ArrayValue extends Assertions {
+class ArrayAssertions extends Assertions {
 
   public function hasSize($size) {
     return $this->is(new Match(

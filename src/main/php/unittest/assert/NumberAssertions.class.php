@@ -1,6 +1,6 @@
 <?php namespace unittest\assert;
 
-class NumericValue extends Assertions {
+class NumberAssertions extends Assertions {
 
   public function isGreaterThan($comparison) {
     return $this->is(new Match(
