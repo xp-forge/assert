@@ -12,7 +12,7 @@ class ArrayValue extends Value {
   }
 
   public function contains($element) {
-    $rep= Value::stringOf($element);
+    $rep= self::stringOf($element);
     return $this->is(new Match(
       function($value) use($element) {
         foreach ($this->value as $value) {
@@ -25,7 +25,7 @@ class ArrayValue extends Value {
   }
 
   public function doesNotContain($element) {
-    $rep= Value::stringOf($element);
+    $rep= self::stringOf($element);
     return $this->isNot(new Match(
       function($value) use($element) {
         foreach ($this->value as $value) {
@@ -38,7 +38,7 @@ class ArrayValue extends Value {
   }
 
   public function startsWith($element) {
-    $rep= Value::stringOf($element);
+    $rep= self::stringOf($element);
     return $this->is(new Match(
       function($value) use($element) {
         return sizeof($value) > 0 && Objects::equal($value[0], $element);
@@ -48,7 +48,7 @@ class ArrayValue extends Value {
   }
 
   public function endsWith($element) {
-    $rep= Value::stringOf($element);
+    $rep= self::stringOf($element);
     return $this->is(new Match(
       function($value) use($element) {
         return sizeof($value) > 0 && Objects::equal($value[sizeof($value) - 1], $element);
