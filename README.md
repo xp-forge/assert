@@ -51,6 +51,13 @@ With special meanings dependant on type:
 * `contains(var $element)` - Asserts a string, array or map contains a given element
 * `doesNotContain(var $element)` - Asserts a string, array or map does not contain a given element
 
+For numbers:
+
+* `isGreaterThan(int|double $comparison)` - Asserts *value > comparison*
+* `isLessThan(int|double $comparison)` - Asserts *value < comparison*
+* `isBetween(int|double $start, int|double $end)` - Asserts *value >= start && value <= end*
+* `isCloseTo(int|double $comparison, int|double $tolerance)` - Asserts value is close (defined per tolerance)
+
 Transformations
 ---------------
 Values can be transformed prior to invoking assertions on them.
