@@ -1,6 +1,6 @@
 <?php namespace unittest\assert;
 
-class StringValue extends Value {
+class StringValue extends Assertions {
 
   public function hasSize($size) {
     return $this->is(new Match(

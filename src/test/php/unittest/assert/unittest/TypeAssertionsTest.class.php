@@ -1,6 +1,6 @@
 <?php namespace unittest\assert\unittest;
 
-use unittest\assert\Value;
+use unittest\assert\Assertions;
 
 abstract class TypeAssertionsTest extends AbstractAssertionsTest {
 
@@ -22,7 +22,7 @@ abstract class TypeAssertionsTest extends AbstractAssertionsTest {
   public function is_not_null($fixture) {
     if (null !== $fixture) $this->assertUnverified(
       ['/Failed to verify that .* is null/ms'],
-      Value::of($fixture)->isNull()
+      Assertions::of($fixture)->isNull()
     );
   }
 
@@ -30,7 +30,7 @@ abstract class TypeAssertionsTest extends AbstractAssertionsTest {
   public function is_not_true($fixture) {
     if (true !== $fixture) $this->assertUnverified(
       ['/Failed to verify that .* is true/ms'],
-      Value::of($fixture)->isTrue()
+      Assertions::of($fixture)->isTrue()
     );
   }
 
@@ -38,7 +38,7 @@ abstract class TypeAssertionsTest extends AbstractAssertionsTest {
   public function is_not_false($fixture) {
     if (false !== $fixture) $this->assertUnverified(
       ['/Failed to verify that .* is false/ms'],
-      Value::of($fixture)->isFalse()
+      Assertions::of($fixture)->isFalse()
     );
   }
 
@@ -46,7 +46,7 @@ abstract class TypeAssertionsTest extends AbstractAssertionsTest {
   public function is_not_equal_to_other_fixtures($fixture, $value) {
     $this->assertUnverified(
       ['/Failed to verify that .* is equal to .*/ms'],
-      Value::of($fixture)->isEqualTo($value)
+      Assertions::of($fixture)->isEqualTo($value)
     );
   }
 }

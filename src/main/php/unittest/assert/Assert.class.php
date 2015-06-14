@@ -9,6 +9,6 @@ abstract class Assert extends \lang\Object {
    * @return unittest.assert.Value
    */
   public static function that($value) {
-    return Value::of($value);
+    return Assertions::of($value);
   }
 }

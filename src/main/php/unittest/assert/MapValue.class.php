@@ -2,7 +2,7 @@
 
 use util\Objects;
 
-class MapValue extends Value {
+class MapValue extends Assertions {
 
   public function hasSize($size) {
     return $this->is(new Match(

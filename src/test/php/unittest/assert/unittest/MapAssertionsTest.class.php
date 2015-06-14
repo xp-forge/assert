@@ -1,6 +1,6 @@
 <?php namespace unittest\assert\unittest;
 
-use unittest\assert\Value;
+use unittest\assert\Assertions;
 use lang\Object;
 
 class MapAssertionsTest extends TypeAssertionsTest {
@@ -34,53 +34,53 @@ class MapAssertionsTest extends TypeAssertionsTest {
 
   #[@test]
   public function verify_is_empty() {
-    $this->assertVerified(Value::of([])->isEmpty());
+    $this->assertVerified(Assertions::of([])->isEmpty());
   }
 
   #[@test, @values('mapsContainingTest')]
   public function is_empty($value) {
     $this->assertUnverified(
       ['/Failed to verify that .+ is empty/ms'],
-      Value::of($value)->isEmpty()
+      Assertions::of($value)->isEmpty()
     );
   }
 
   #[@test, @values('allMaps')]
   public function verify_has_size($value) {
-    $this->assertVerified(Value::of($value)->hasSize(sizeof($value)));
+    $this->assertVerified(Assertions::of($value)->hasSize(sizeof($value)));
   }
 
   #[@test, @values('allMaps')]
   public function has_size($value) {
     $this->assertUnverified(
       ['/Failed to verify that .+ has a size of 7/ms'],
-      Value::of($value)->hasSize(7)
+      Assertions::of($value)->hasSize(7)
     );
   }
 
   #[@test, @values('mapsContainingTest')]
   public function verify_contains_test($value) {
-    $this->assertVerified(Value::of($value)->contains('test'));
+    $this->assertVerified(Assertions::of($value)->contains('test'));
   }
 
   #[@test, @values('mapsNotContainingTest')]
   public function contains_test($value) {
     $this->assertUnverified(
       ['/Failed to verify that .+ contains "test"/ms'],
-      Value::of($value)->contains('test')
+      Assertions::of($value)->contains('test')
     );
   }
 
   #[@test, @values('mapsNotContainingTest')]
   public function verify_does_not_contains_test($value) {
-    $this->assertVerified(Value::of($value)->doesNotContain('test'));
+    $this->assertVerified(Assertions::of($value)->doesNotContain('test'));
   }
 
   #[@test, @values('mapsContainingTest')]
   public function does_not_contains_test($value) {
     $this->assertUnverified(
       ['/Failed to verify that .+ does not contain "test"/ms'],
-      Value::of($value)->doesNotContain('test')
+      Assertions::of($value)->doesNotContain('test')
     );
   }
 
@@ -88,7 +88,7 @@ class MapAssertionsTest extends TypeAssertionsTest {
   public function objects_do_not_start_with_aynthing($value) {
     $this->assertUnverified(
       ['/Failed to verify that .* starts with anything/ms'],
-      Value::of($value)->startsWith('...')
+      Assertions::of($value)->startsWith('...')
     );
   }
 
@@ -96,7 +96,7 @@ class MapAssertionsTest extends TypeAssertionsTest {
   public function objects_do_not_end_with_aynthing($value) {
     $this->assertUnverified(
       ['/Failed to verify that .* ends with anything/ms'],
-      Value::of($value)->endsWith('...')
+      Assertions::of($value)->endsWith('...')
     );
   }
 }

@@ -1,6 +1,6 @@
 <?php namespace unittest\assert\unittest;
 
-use unittest\assert\Value;
+use unittest\assert\Assertions;
 
 /**
  * Tests `extracting()` method.
@@ -35,32 +35,32 @@ class ExtractingTest extends AbstractAssertionsTest {
 
   #[@test, @values('people')]
   public function extracting($person) {
-    $this->assertVerified(Value::of($person)->extracting('name')->isEqualTo('Test'));
+    $this->assertVerified(Assertions::of($person)->extracting('name')->isEqualTo('Test'));
   }
 
   #[@test, @values('people')]
   public function extracting_multiple($person) {
-    $this->assertVerified(Value::of($person)->extracting(['name', 'age'])->isEqualTo(['Test', 42]));
+    $this->assertVerified(Assertions::of($person)->extracting(['name', 'age'])->isEqualTo(['Test', 42]));
   }
 
   #[@test, @values('people')]
   public function extracting_by_name($person) {
-    $this->assertVerified(Value::of($person)->extracting(['key' => 'id'])->isEqualTo(['key' => 1]));
+    $this->assertVerified(Assertions::of($person)->extracting(['key' => 'id'])->isEqualTo(['key' => 1]));
   }
 
   #[@test, @values('people')]
   public function extracting_chained($person) {
-    $this->assertVerified(Value::of($person)->extracting('department')->extracting('name')->isEqualTo('Test'));
+    $this->assertVerified(Assertions::of($person)->extracting('department')->extracting('name')->isEqualTo('Test'));
   }
 
   #[@test, @values('people')]
   public function extracting_from_array($person) {
-    $this->assertVerified(Value::of([$person, $person])->extracting('name')->isEqualTo(['Test', 'Test']));
+    $this->assertVerified(Assertions::of([$person, $person])->extracting('name')->isEqualTo(['Test', 'Test']));
   }
 
   #[@test]
   public function extracting_from_instance_via_closure() {
-    $this->assertVerified(Value::of(new Person(1, 'Test', 42, ['name' => 'Test']))
+    $this->assertVerified(Assertions::of(new Person(1, 'Test', 42, ['name' => 'Test']))
       ->extracting(function($person) { return $person->name(); })
       ->isEqualTo('Test')
     );
@@ -68,7 +68,7 @@ class ExtractingTest extends AbstractAssertionsTest {
 
   #[@test]
   public function extracting_from_map_via_closure() {
-    $this->assertVerified(Value::of(['id' => 1, 'name' => 'Test'])
+    $this->assertVerified(Assertions::of(['id' => 1, 'name' => 'Test'])
       ->extracting(function($person) { return $person['name']; })
       ->isEqualTo('Test')
     );
@@ -76,7 +76,7 @@ class ExtractingTest extends AbstractAssertionsTest {
 
   #[@test]
   public function extracting_from_map_via_array_of_string_and_closure() {
-    $this->assertVerified(Value::of(['id' => 1, 'name' => 'Test'])
+    $this->assertVerified(Assertions::of(['id' => 1, 'name' => 'Test'])
       ->extracting([function($person) { return $person['name']; }, 'id'])
       ->isEqualTo(['Test', 1])
     );
