@@ -3,6 +3,14 @@ Data sequences change log
 
 ## ?.?.? / ????-??-??
 
+* Made it possible to supply closures to `extracting()`. See PR #6
+  (@thekid)
+* Added `isEmpty()` assertion for strings, arrays and maps. See PR #5
+  (@thekid)
+* Added numeric assertions isGreaterThan(), isLessThan(), isBetween()
+  and isCloseTo(). See PR #4
+  (@thekid)
+
 ## 0.7.0 / 2015-06-14
 
 * **Heads up: Removed support for lang.types wrapper types** - @thekid
