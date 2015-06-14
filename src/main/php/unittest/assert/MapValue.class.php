@@ -2,12 +2,12 @@
 
 use util\Objects;
 
-class ArrayPrimitiveValue extends Value {
+class MapValue extends Value {
 
   public function hasSize($size) {
     return $this->is(new Match(
       function($value) use($size) { return sizeof($this->value) === $size; },
-      ['%s does not have a length of '.$size, '%s has a size of '.$size]
+      ['%s does not have a size of '.$size, '%s has a size of '.$size]
     ));
   }
 
@@ -37,26 +37,6 @@ class ArrayPrimitiveValue extends Value {
     ));
   }
 
-  public function startsWith($element) {
-    $rep= Value::stringOf($element);
-    return $this->is(new Match(
-      function($value) use($element) {
-        return sizeof($value) > 0 && Objects::equal($value[0], $element);
-      },
-      ['%s does not start with '.$rep, '%s starts with '.$rep]
-    ));
-  }
-
-  public function endsWith($element) {
-    $rep= Value::stringOf($element);
-    return $this->is(new Match(
-      function($value) use($element) {
-        return sizeof($value) > 0 && Objects::equal($value[sizeof($value) - 1], $element);
-      },
-      ['%s does not end with '.$rep, '%s ends with '.$rep]
-    ));
-  }
-
   /**
    * Extract a given arg
    *
@@ -64,10 +44,20 @@ class ArrayPrimitiveValue extends Value {
    * @return self
    */
   public function extracting($arg) {
-    $return= [];
-    foreach ($this->value as $value) {
-      $return[]= self::of($value)->extracting($arg)->value;
+    if (is_array($arg)) {
+      $value= [];
+      foreach ($arg as $key) {
+        if (!array_key_exists($key, $this->value)) {
+          throw new \lang\IndexOutOfBoundsException('Cannot extract "'.$key.'" from '.Value::stringOf($this->value));
+        }
+        $value[]= $this->value[$key];
+      }
+      return self::of($value);
+    } else {
+      if (!array_key_exists($arg, $this->value)) {
+        throw new \lang\IndexOutOfBoundsException('Cannot extract "'.$arg.'" from '.Value::stringOf($this->value));
+      }
+      return self::of($this->value[$arg]);
     }
-    return self::of($return);
   }
 }

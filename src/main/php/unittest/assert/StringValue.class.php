@@ -1,6 +1,6 @@
 <?php namespace unittest\assert;
 
-class StringPrimitiveValue extends Value {
+class StringValue extends Value {
 
   public function hasSize($size) {
     return $this->is(new Match(

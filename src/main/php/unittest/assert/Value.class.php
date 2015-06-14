@@ -25,11 +25,11 @@ class Value extends \lang\Object {
    */
   public static function of($value) {
     if (is_array($value) && 0 === key($value)) {
-      return new ArrayPrimitiveValue($value);
+      return new ArrayValue($value);
     } else if (is_array($value)) {
-      return new MapPrimitiveValue($value);
+      return new MapValue($value);
     } else if (is_string($value)) {
-      return new StringPrimitiveValue($value);
+      return new StringValue($value);
     } else {
       return new Value($value);
     }
