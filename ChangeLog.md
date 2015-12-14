@@ -3,6 +3,12 @@ Data sequences change log
 
 ## ?.?.? / ????-??-??
 
+## 0.9.0 / 2015-12-14
+
+* **Heads up**: Changed minimum XP version to run webtests to XP
+  6.5.0, and with it the minimum PHP version to PHP 5.5
+  (@thekid)
+
 ## 0.8.0 / 2015-06-15
 
 * **Heads up: Competely rewrote inner workings**

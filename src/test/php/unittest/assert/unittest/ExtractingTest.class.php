@@ -1,5 +1,6 @@
 <?php namespace unittest\assert\unittest;
 
+use lang\Object;
 use unittest\assert\Assertions;
 
 /**
@@ -11,19 +12,19 @@ class ExtractingTest extends AbstractAssertionsTest {
   protected function people() {
     return [
       [['id' => 1, 'name' => 'Test', 'age' => 42, 'department' => ['name' => 'Test']]],
-      [newinstance('lang.Object', [], [
+      [newinstance(Object::class, [], [
         'id'            => 1,
         'name'          => 'Test',
         'age'           => 42,
         'department'    => ['name' => 'Test']
       ])],
-      [newinstance('lang.Object', [], [
+      [newinstance(Object::class, [], [
         'id'            => function() { return 1; },
         'name'          => function() { return 'Test'; },
         'age'           => function() { return 42; },
         'department'    => function() { return ['name' => 'Test']; }
       ])],
-      [newinstance('lang.Object', [], [
+      [newinstance(Object::class, [], [
         'getId'         => function() { return 1; },
         'getName'       => function() { return 'Test'; },
         'getAge'        => function() { return 42; },

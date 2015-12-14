@@ -1,5 +1,6 @@
 <?php namespace unittest\assert\unittest;
 
+use lang\Object;
 use unittest\assert\InstanceExtractor;
 
 /**
@@ -9,7 +10,7 @@ class InstanceExtractorTest extends \unittest\TestCase {
 
   /** @return lang.Object */
   protected function fixture($def) {
-    return newinstance('lang.Object', [], $def);
+    return newinstance(Object::class, [], $def);
   }
 
   #[@test]

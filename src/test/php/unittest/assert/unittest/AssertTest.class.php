@@ -1,5 +1,6 @@
 <?php namespace unittest\assert\unittest;
 
+use unittest\assert\Condition;
 use unittest\assert\Assert;
 use unittest\assert\All;
 use unittest\AssertionFailedError;
@@ -51,7 +52,7 @@ class AssertTest extends \unittest\TestCase {
   public function even_inside_allof_execution_stops_at_first_failure() {
     try {
       All::of(function() {
-        Assert::that('Hello')->isEmpty()->is(newinstance('unittest.assert.Condition', [], [
+        Assert::that('Hello')->isEmpty()->is(newinstance(Condition::class, [], [
           'matches' => function($value) { throw new IllegalStateException('Unreachable'); }
         ]));
       });

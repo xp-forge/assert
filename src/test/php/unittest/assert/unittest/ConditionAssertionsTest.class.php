@@ -1,5 +1,6 @@
 <?php namespace unittest\assert\unittest;
 
+use unittest\assert\Condition;
 use unittest\assert\Assertions;
 
 /**
@@ -9,14 +10,14 @@ class ConditionAssertionsTest extends AbstractAssertionsTest {
 
   #[@test]
   public function is_a_test() {
-    $this->assertVerified(Assertions::of('Test')->is(newinstance('unittest.assert.Condition', [], [
+    $this->assertVerified(Assertions::of('Test')->is(newinstance(Condition::class, [], [
       'matches' => function($value) { return 'Test' === $value; }
     ])));
   }
 
   #[@test]
   public function is_not_a_test() {
-    $this->assertVerified(Assertions::of('Test')->isNot(newinstance('unittest.assert.Condition', [], [
+    $this->assertVerified(Assertions::of('Test')->isNot(newinstance(Condition::class, [], [
       'matches' => function($value) { return 'Test' !== $value; }
     ])));
   }
