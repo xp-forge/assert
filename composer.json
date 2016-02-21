@@ -9,6 +9,9 @@
     "xp-framework/core": "^7.0 | ^6.0",
     "php" : ">=5.4.0"
   },
+  "require-dev" : {
+    "xp-framework/unittest": "^7.0 | ^6.9"
+  },
   "autoload" : {
     "files" : ["src/main/php/autoload.php"]
   }
