@@ -1,7 +1,11 @@
-Data sequences change log
-=========================
+Assertions change log
+=====================
 
 ## ?.?.? / ????-??-??
+
+## 2.0.0 / 2016-02-21
+
+* Added version compatibility with XP 7 - @thekid
 
 ## 1.0.0 / 2015-12-14
 
