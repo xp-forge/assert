@@ -1,6 +1,6 @@
 <?php namespace unittest\assert;
 
-abstract class Assert extends \lang\Object {
+abstract class Assert {
 
   /**
    * Entry point

@@ -2,7 +2,7 @@
 
 use util\Objects;
 
-abstract class Condition extends \lang\Object {
+abstract class Condition {
 
   /**
    * Test whether this condition matches a given value
