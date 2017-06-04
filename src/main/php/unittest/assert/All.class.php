@@ -2,7 +2,7 @@
 
 use lang\Throwable;
 
-abstract class All extends \lang\Object {
+abstract class All {
 
   /**
    * Runs all assertions in the block

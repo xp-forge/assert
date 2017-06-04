@@ -1,6 +1,5 @@
 <?php namespace unittest\assert;
 
-use lang\Generic;
 use lang\IndexOutOfBoundsException;
 
 /**
@@ -8,15 +7,15 @@ use lang\IndexOutOfBoundsException;
  *
  * @test  xp://unittest.assert.unittest.InstanceExtractorTest
  */
-class InstanceExtractor extends \lang\Object {
+class InstanceExtractor {
   protected $value;
 
   /**
    * Creates a new instance with a given value
    *
-   * @param  lang.Generic $value
+   * @param  object $value
    */
-  public function __construct(Generic $value) {
+  public function __construct($value) {
     $this->value= $value;
   }
 

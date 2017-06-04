@@ -4,7 +4,7 @@ use unittest\AssertionFailedError;
 use unittest\FormattedMessage;
 use util\Objects;
 
-class AssertionsFailed extends \lang\Object {
+class AssertionsFailed {
   public static $EMPTY;
   protected $failures= [];
 

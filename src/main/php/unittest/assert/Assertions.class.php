@@ -3,7 +3,7 @@
 use lang\Type;
 use unittest\AssertionFailedError;
 
-class Assertions extends \lang\Object {
+class Assertions {
   const CURRENT = 0;
   protected $value;
   protected $failed;
