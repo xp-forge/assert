@@ -15,8 +15,7 @@ Example
 -------
 
 ```php
-use unittest\assert\Assert;
-use unittest\assert\All;
+use unittest\assert\{Assert, All};
 
 class ExampleTest extends \unittest\TestCase {
 
@@ -40,7 +39,7 @@ Running this test will yield one succeeded and one failed test. The difference t
 On top of that, this library's assertions are also more flexible: As seen in the above case, we wrapped the chain in an `All::of()` call which will yield *all* failed assertions, not just the first one.
 
 ```sh
-$ unittest ExampleTest.class.php
+$ xp test ExampleTest.class.php
 [.F]
 
 F unittest.TestAssertionFailed(test= ExampleTest::fails, time= 0.002 seconds) {
