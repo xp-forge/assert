@@ -1,7 +1,6 @@
 <?php namespace unittest\assert\unittest;
 
 use unittest\assert\Assertions;
-use lang\Object;
 
 class AssertionsTest extends AbstractAssertionsTest {
 
@@ -13,14 +12,14 @@ class AssertionsTest extends AbstractAssertionsTest {
   #[@test, @values('fixtures')]
   public function fixtures_are_not_equal_to_new_object_via_isEqualTo($value) {
     $this->assertUnverified(
-      ['/Failed to verify that .* is equal to lang.Object .+/ms'],
-      Assertions::of($value)->isEqualTo(new Object())
+      ['/Failed to verify that .* is equal to unittest.assert.unittest.Name .+/ms'],
+      Assertions::of($value)->isEqualTo(new Name('Test'))
     );
   }
 
   #[@test, @values('fixtures')]
   public function fixtures_are_not_equal_to_new_object_via_isNotEqualTo($value) {
-    $this->assertVerified(Assertions::of($value)->isNotEqualTo(new Object()));
+    $this->assertVerified(Assertions::of($value)->isNotEqualTo(new Name('Test')));
   }
 
   #[@test, @values('fixtures')]
@@ -38,7 +37,7 @@ class AssertionsTest extends AbstractAssertionsTest {
 
   #[@test, @values('fixtures')]
   public function is_in_an_array_of_itself_and_an_object($value) {
-    $this->assertVerified(Assertions::of($value)->isIn([new Object(), $value]));
+    $this->assertVerified(Assertions::of($value)->isIn([new Name('Test'), $value]));
   }
 
   #[@test, @values('fixtures')]
@@ -61,7 +60,7 @@ class AssertionsTest extends AbstractAssertionsTest {
   public function is_in_an_array_of_itself_and_an_object_via_isNotIn($value) {
     $this->assertUnverified(
       ['/Failed to verify that .* is not contained in .*/ms'],
-      Assertions::of($value)->isNotIn([new Object(), $value])
+      Assertions::of($value)->isNotIn([new Name('Test'), $value])
     );
   }
 

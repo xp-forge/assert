@@ -3,6 +3,10 @@ Assertions change log
 
 ## ?.?.? / ????-??-??
 
+## 3.0.1 / 2018-04-02
+
+* Fixed compatiblity with PHP 7.2 - @thekid
+
 ## 3.0.0 / 2017-06-04
 
 * **Heads up:** Dropped PHP 5.5 support - @thekid

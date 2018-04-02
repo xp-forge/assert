@@ -1,7 +1,6 @@
 <?php namespace unittest\assert\unittest;
 
 use unittest\assert\Assertions;
-use lang\Object;
 
 class MapAssertionsTest extends TypeAssertionsTest {
 

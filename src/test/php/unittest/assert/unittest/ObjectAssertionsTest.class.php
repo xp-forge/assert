@@ -1,17 +1,18 @@
 <?php namespace unittest\assert\unittest;
 
 use unittest\assert\Assertions;
-use lang\Object;
+use unittest\TestCase;
+use lang\Value;
 use lang\XPClass;
 
-class ObjectAssertionsTest extends TypeAssertionsTest {
+class ObjectAssertionsTest extends TypeAssertionsTest implements Value {
 
   /** @return var[][] */
   protected function typeFixtures() {
-    return [[null], [new Object()]];
+    return [[null], [new Name('Test')]];
   }
 
-  #[@test, @values([['unittest.TestCase', 'lang.Object']])]
+  #[@test, @values([TypeAssertionsTest::class, TestCase::class, Value::class])]
   public function verify_is_instance_of($parent) {
     $this->assertVerified(Assertions::of($this)->isInstanceOf($parent));
   }
@@ -24,7 +25,7 @@ class ObjectAssertionsTest extends TypeAssertionsTest {
     );
   }
 
-  #[@test, @values([['unittest.TestCase', 'lang.Object']])]
+  #[@test, @values([TypeAssertionsTest::class, TestCase::class, Value::class])]
   public function verify_is_instance_of_class($parent) {
     $this->assertVerified(Assertions::of($this)->isInstanceOf(XPClass::forName($parent)));
   }

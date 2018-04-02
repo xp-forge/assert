@@ -1,7 +1,6 @@
 <?php namespace unittest\assert\unittest;
 
 use unittest\assert\Assertions;
-use lang\Object;
 
 class ArrayAssertionsTest extends TypeAssertionsTest {
 
@@ -41,7 +40,7 @@ class ArrayAssertionsTest extends TypeAssertionsTest {
 
   #[@test, @values('fixtures')]
   public function an_array_of_the_fixture_value_and_an_object_contains_the_value($value) {
-    $this->assertVerified(Assertions::of([new Object(), $value])->contains($value));
+    $this->assertVerified(Assertions::of([new Name('Test'), $value])->contains($value));
   }
 
   #[@test, @values('fixtures')]

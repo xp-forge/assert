@@ -1,6 +1,5 @@
 <?php namespace unittest\assert\unittest;
 
-use lang\Object;
 use unittest\assert\InstanceExtractor;
 
 /**
@@ -8,9 +7,9 @@ use unittest\assert\InstanceExtractor;
  */
 class InstanceExtractorTest extends \unittest\TestCase {
 
-  /** @return lang.Object */
+  /** @return unittest.assert.unittest.Name */
   protected function fixture($def) {
-    return newinstance(Object::class, [], $def);
+    return newinstance(Name::class, ['Test'], $def);
   }
 
   #[@test]
@@ -33,7 +32,7 @@ class InstanceExtractorTest extends \unittest\TestCase {
 
   #[@test, @expect(
   #  class= 'lang.IndexOutOfBoundsException',
-  #  withMessage= '/Cannot extract "non-existant" from lang.Object/'
+  #  withMessage= '/Cannot extract "non-existant" from unittest.assert.unittest.Name/'
   #)]
   public function non_existant() {
     (new InstanceExtractor($this->fixture([])))->extract('non-existant');
