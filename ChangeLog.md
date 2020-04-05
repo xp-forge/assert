@@ -3,6 +3,11 @@ Assertions change log
 
 ## ?.?.? / ????-??-??
 
+## 3.0.3 / 2020-04-05
+
+* Implemented RFC #335: Remove deprecated key/value pair annotation syntax
+  (@thekid)
+
 ## 3.0.2 / 2020-04-05
 
 * Made compatible with XP 10 - @thekid

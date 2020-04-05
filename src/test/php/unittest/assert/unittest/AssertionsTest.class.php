@@ -74,7 +74,7 @@ class AssertionsTest extends AbstractAssertionsTest {
     $this->assertVerified(Assertions::of(null)->isNull());
   }
 
-  #[@test, @values(source= 'fixtures', args= [[null]])]
+  #[@test, @values(['source' => 'fixtures', 'args' => [[null]]])]
   public function all_other_values_are_not_null($value) {
     $this->assertUnverified(
       ['/Failed to verify that .* is null/ms'],
@@ -87,7 +87,7 @@ class AssertionsTest extends AbstractAssertionsTest {
     $this->assertVerified(Assertions::of(true)->isTrue());
   }
 
-  #[@test, @values(source= 'fixtures', args= [[true]])]
+  #[@test, @values(['source' => 'fixtures', 'args' => [[true]]])]
   public function all_other_values_are_not_true($value) {
     $this->assertUnverified(
       ['/Failed to verify that .* is true/ms'],
@@ -100,7 +100,7 @@ class AssertionsTest extends AbstractAssertionsTest {
     $this->assertVerified(Assertions::of(false)->isFalse());
   }
 
-  #[@test, @values(source= 'fixtures', args= [[false]])]
+  #[@test, @values(['source' => 'fixtures', 'args' => [[false]]])]
   public function all_other_values_are_not_false($value) {
     $this->assertUnverified(
       ['/Failed to verify that .* is false/ms'],
