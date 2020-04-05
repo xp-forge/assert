@@ -16,7 +16,7 @@ Example
 ```php
 use unittest\assert\{Assert, All};
 
-class ExampleTest extends \unittest\TestCase {
+class ExampleTest {
 
   #[@test]
   public function succeeds() {
