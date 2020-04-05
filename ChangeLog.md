@@ -3,6 +3,10 @@ Assertions change log
 
 ## ?.?.? / ????-??-??
 
+## 3.0.2 / 2020-04-05
+
+* Made compatible with XP 10 - @thekid
+
 ## 3.0.1 / 2018-04-02
 
 * Fixed compatiblity with PHP 7.2 - @thekid
