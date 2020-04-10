@@ -1,10 +1,8 @@
 <?php namespace unittest\assert\unittest;
 
-use unittest\assert\Condition;
-use unittest\assert\Assert;
-use unittest\assert\All;
-use unittest\AssertionFailedError;
 use lang\IllegalStateException;
+use unittest\AssertionFailedError;
+use unittest\assert\{All, Assert, Condition};
 
 class AssertTest extends \unittest\TestCase {
 

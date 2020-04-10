@@ -1,9 +1,8 @@
 <?php namespace unittest\assert\unittest;
 
-use unittest\assert\Assertions;
+use lang\{Value, XPClass};
 use unittest\TestCase;
-use lang\Value;
-use lang\XPClass;
+use unittest\assert\Assertions;
 
 class ObjectAssertionsTest extends TypeAssertionsTest implements Value {
 

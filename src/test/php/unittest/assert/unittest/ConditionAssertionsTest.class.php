@@ -1,7 +1,6 @@
 <?php namespace unittest\assert\unittest;
 
-use unittest\assert\Condition;
-use unittest\assert\Assertions;
+use unittest\assert\{Assertions, Condition};
 
 /**
  * Tests `is()` and `isNot()` methods which accept unittest.assert.Condition instances

@@ -1,9 +1,7 @@
 <?php namespace unittest\assert\unittest;
 
-use unittest\assert\AssertionsFailed;
-use unittest\assert\Assertions;
-use unittest\AssertionFailedError;
-use unittest\FormattedMessage;
+use unittest\{AssertionFailedError, FormattedMessage};
+use unittest\assert\{Assertions, AssertionsFailed};
 use util\Objects;
 
 abstract class AbstractAssertionsTest extends \unittest\TestCase {

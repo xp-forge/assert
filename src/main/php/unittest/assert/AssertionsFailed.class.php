@@ -1,7 +1,6 @@
 <?php namespace unittest\assert;;
 
-use unittest\AssertionFailedError;
-use unittest\FormattedMessage;
+use unittest\{AssertionFailedError, FormattedMessage};
 use util\Objects;
 
 class AssertionsFailed {
