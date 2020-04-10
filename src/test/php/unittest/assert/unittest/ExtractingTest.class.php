@@ -11,24 +11,24 @@ class ExtractingTest extends AbstractAssertionsTest {
   protected function people() {
     return [
       [['id' => 1, 'name' => 'Test', 'age' => 42, 'department' => ['name' => 'Test']]],
-      [newinstance(Name::class, ['Test'], [
-        'id'            => 1,
-        'name'          => 'Test',
-        'age'           => 42,
-        'department'    => ['name' => 'Test']
-      ])],
-      [newinstance(Name::class, ['Test'], [
-        'id'            => function() { return 1; },
-        'name'          => function() { return 'Test'; },
-        'age'           => function() { return 42; },
-        'department'    => function() { return ['name' => 'Test']; }
-      ])],
-      [newinstance(Name::class, ['Test'], [
-        'getId'         => function() { return 1; },
-        'getName'       => function() { return 'Test'; },
-        'getAge'        => function() { return 42; },
-        'getDepartment' => function() { return ['name' => 'Test']; }
-      ])],
+      [new class('Test') extends Name {
+        public $id= 1;
+        public $name= 'Test';
+        public $age= 42;
+        public $department= ['name' => 'Test'];
+      }],
+      [new class('Test') extends Name {
+        public function id() { return 1; }
+        public function name() { return 'Test'; }
+        public function age() { return 42; }
+        public function department() { return ['name' => 'Test']; }
+      }],
+      [new class('Test') extends Name {
+        public function getId() { return 1; }
+        public function getName() { return 'Test'; }
+        public function getAge() { return 42; }
+        public function getDepartment() { return ['name' => 'Test']; }
+      }],
       [new Person(1, 'Test', 42, ['name' => 'Test'])]
     ];
   }

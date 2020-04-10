@@ -50,9 +50,9 @@ class AssertTest extends \unittest\TestCase {
   public function even_inside_allof_execution_stops_at_first_failure() {
     try {
       All::of(function() {
-        Assert::that('Hello')->isEmpty()->is(newinstance(Condition::class, [], [
-          'matches' => function($value) { throw new IllegalStateException('Unreachable'); }
-        ]));
+        Assert::that('Hello')->isEmpty()->is(new class() extends Condition {
+          public function matches($value) { throw new IllegalStateException('Unreachable'); }
+        });
       });
     } catch (AssertionFailedError $expected) {
       return;
