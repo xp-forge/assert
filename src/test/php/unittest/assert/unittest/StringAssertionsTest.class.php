@@ -1,6 +1,7 @@
 <?php namespace unittest\assert\unittest;
 
 use unittest\assert\Assertions;
+use unittest\{Test, Values};
 
 class StringAssertionsTest extends TypeAssertionsTest {
 
@@ -31,12 +32,12 @@ class StringAssertionsTest extends TypeAssertionsTest {
     ]);
   }
 
-  #[@test]
+  #[Test]
   public function verify_is_empty() {
     $this->assertVerified(Assertions::of('')->isEmpty());
   }
 
-  #[@test, @values('stringsContainingTest')]
+  #[Test, Values('stringsContainingTest')]
   public function is_empty($value) {
     $this->assertUnverified(
       ['/Failed to verify that .+ is empty/'],
@@ -44,12 +45,12 @@ class StringAssertionsTest extends TypeAssertionsTest {
     );
   }
 
-  #[@test, @values([[0, ''], [4, 'test']])]
+  #[Test, Values([[0, ''], [4, 'test']])]
   public function hasSize($size, $value) {
     $this->assertVerified(Assertions::of($value)->hasSize($size));
   }
 
-  #[@test, @values('stringsContainingTest')]
+  #[Test, Values('stringsContainingTest')]
   public function strings_with_Test_are_not_empty($value) {
     $this->assertUnverified(
       ['/Failed to verify that .* has a length of 0/'],
@@ -57,12 +58,12 @@ class StringAssertionsTest extends TypeAssertionsTest {
     );
   }
 
-  #[@test, @values('stringsStartingWithTest')]
+  #[Test, Values('stringsStartingWithTest')]
   public function strings_with_Test_start_with_Test($value) {
     $this->assertVerified(Assertions::of($value)->startsWith('Test'));
   }
 
-  #[@test, @values('stringsNotContainingTest')]
+  #[Test, Values('stringsNotContainingTest')]
   public function other_values_dont_start_with_Test($value) {
     $this->assertUnverified(
       ['/Failed to verify that .* starts with "Test"/'],
@@ -70,12 +71,12 @@ class StringAssertionsTest extends TypeAssertionsTest {
     );
   }
 
-  #[@test, @values('stringsEndingWithTest')]
+  #[Test, Values('stringsEndingWithTest')]
   public function strings_with_Test_end_with_Test($value) {
     $this->assertVerified(Assertions::of($value)->endsWith('Test'));
   }
 
-  #[@test, @values('stringsNotContainingTest')]
+  #[Test, Values('stringsNotContainingTest')]
   public function other_values_dont_end_with_Test($value) {
     $this->assertUnverified(
       ['/Failed to verify that .* ends with "Test"/'],
@@ -83,12 +84,12 @@ class StringAssertionsTest extends TypeAssertionsTest {
     );
   }
 
-  #[@test, @values('stringsContainingTest')]
+  #[Test, Values('stringsContainingTest')]
   public function verify_strings_with_Test_contain_Test($value) {
     $this->assertVerified(Assertions::of($value)->contains('Test'));
   }
 
-  #[@test, @values('stringsNotContainingTest')]
+  #[Test, Values('stringsNotContainingTest')]
   public function strings_with_Test_contain_Test($value) {
     $this->assertUnverified(
       ['/Failed to verify that .* contains "Test"/'],
@@ -96,12 +97,12 @@ class StringAssertionsTest extends TypeAssertionsTest {
     );
   }
 
-  #[@test, @values('stringsNotContainingTest')]
+  #[Test, Values('stringsNotContainingTest')]
   public function verify_other_values_dont_contain_Test($value) {
     $this->assertVerified(Assertions::of($value)->doesNotContain('Test'));
   }
 
-  #[@test, @values('stringsContainingTest')]
+  #[Test, Values('stringsContainingTest')]
   public function strings_with_Test_do_not_contain_Test($value) {
     $this->assertUnverified(
       ['/Failed to verify that .* does not contain "Test"/'],

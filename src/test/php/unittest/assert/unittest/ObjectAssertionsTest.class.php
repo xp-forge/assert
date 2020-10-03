@@ -1,8 +1,8 @@
 <?php namespace unittest\assert\unittest;
 
 use lang\{Value, XPClass};
-use unittest\TestCase;
 use unittest\assert\Assertions;
+use unittest\{Test, TestCase, Values};
 
 class ObjectAssertionsTest extends TypeAssertionsTest implements Value {
 
@@ -11,12 +11,12 @@ class ObjectAssertionsTest extends TypeAssertionsTest implements Value {
     return [[null], [new Name('Test')]];
   }
 
-  #[@test, @values([TypeAssertionsTest::class, TestCase::class, Value::class])]
+  #[Test, Values([TypeAssertionsTest::class, TestCase::class, Value::class])]
   public function verify_is_instance_of($parent) {
     $this->assertVerified(Assertions::of($this)->isInstanceOf($parent));
   }
 
-  #[@test, @values('fixtures')]
+  #[Test, Values('fixtures')]
   public function is_not_instance_of($value) {
     $this->assertUnverified(
       ['/Failed to verify that .* is an instance of lang.XPClass<lang.Runnable>/ms'],
@@ -24,12 +24,12 @@ class ObjectAssertionsTest extends TypeAssertionsTest implements Value {
     );
   }
 
-  #[@test, @values([TypeAssertionsTest::class, TestCase::class, Value::class])]
+  #[Test, Values([TypeAssertionsTest::class, TestCase::class, Value::class])]
   public function verify_is_instance_of_class($parent) {
     $this->assertVerified(Assertions::of($this)->isInstanceOf(XPClass::forName($parent)));
   }
 
-  #[@test, @values('fixtures')]
+  #[Test, Values('fixtures')]
   public function is_not_instance_of_class($value) {
     $this->assertUnverified(
       ['/Failed to verify that .* is an instance of lang.XPClass<lang.Runnable>/ms'],
@@ -37,7 +37,7 @@ class ObjectAssertionsTest extends TypeAssertionsTest implements Value {
     );
   }
 
-  #[@test, @values('typeFixtures')]
+  #[Test, Values('typeFixtures')]
   public function objects_do_not_start_with_aynthing($value) {
     $this->assertUnverified(
       ['/Failed to verify that .* starts with anything/ms'],
@@ -45,7 +45,7 @@ class ObjectAssertionsTest extends TypeAssertionsTest implements Value {
     );
   }
 
-  #[@test, @values('typeFixtures')]
+  #[Test, Values('typeFixtures')]
   public function objects_do_not_end_with_aynthing($value) {
     $this->assertUnverified(
       ['/Failed to verify that .* ends with anything/ms'],
@@ -53,7 +53,7 @@ class ObjectAssertionsTest extends TypeAssertionsTest implements Value {
     );
   }
 
-  #[@test, @values('typeFixtures')]
+  #[Test, Values('typeFixtures')]
   public function objects_do_not_contain_aynthing($value) {
     $this->assertUnverified(
       ['/Failed to verify that .* contains anything/ms'],
@@ -61,7 +61,7 @@ class ObjectAssertionsTest extends TypeAssertionsTest implements Value {
     );
   }
 
-  #[@test, @values('typeFixtures')]
+  #[Test, Values('typeFixtures')]
   public function objects_does_not_not_contain_aynthing($value) {
     $this->assertUnverified(
       ['/Failed to verify that .* does not contain anything/ms'],

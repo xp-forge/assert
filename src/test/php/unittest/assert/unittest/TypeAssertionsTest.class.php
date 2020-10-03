@@ -1,6 +1,7 @@
 <?php namespace unittest\assert\unittest;
 
 use unittest\assert\Assertions;
+use unittest\{Test, Values};
 
 abstract class TypeAssertionsTest extends AbstractAssertionsTest {
 
@@ -18,7 +19,7 @@ abstract class TypeAssertionsTest extends AbstractAssertionsTest {
     return $return;
   }
 
-  #[@test, @values('typeFixtures')]
+  #[Test, Values('typeFixtures')]
   public function is_not_null($fixture) {
     if (null !== $fixture) $this->assertUnverified(
       ['/Failed to verify that .* is null/ms'],
@@ -26,7 +27,7 @@ abstract class TypeAssertionsTest extends AbstractAssertionsTest {
     );
   }
 
-  #[@test, @values('typeFixtures')]
+  #[Test, Values('typeFixtures')]
   public function is_not_true($fixture) {
     if (true !== $fixture) $this->assertUnverified(
       ['/Failed to verify that .* is true/ms'],
@@ -34,7 +35,7 @@ abstract class TypeAssertionsTest extends AbstractAssertionsTest {
     );
   }
 
-  #[@test, @values('typeFixtures')]
+  #[Test, Values('typeFixtures')]
   public function is_not_false($fixture) {
     if (false !== $fixture) $this->assertUnverified(
       ['/Failed to verify that .* is false/ms'],
@@ -42,7 +43,7 @@ abstract class TypeAssertionsTest extends AbstractAssertionsTest {
     );
   }
 
-  #[@test, @values('otherFixtures')]
+  #[Test, Values('otherFixtures')]
   public function is_not_equal_to_other_fixtures($fixture, $value) {
     $this->assertUnverified(
       ['/Failed to verify that .* is equal to .*/ms'],

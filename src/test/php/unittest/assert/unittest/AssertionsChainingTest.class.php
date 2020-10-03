@@ -1,15 +1,16 @@
 <?php namespace unittest\assert\unittest;
 
+use unittest\Test;
 use unittest\assert\Assertions;
 
 class AssertionsChainingTest extends AbstractAssertionsTest {
 
-  #[@test]
+  #[Test]
   public function startsWith_and_endsWith() {
     $this->assertVerified(Assertions::of('www.example.com')->startsWith('www')->endsWith('com'));
   }
 
-  #[@test]
+  #[Test]
   public function array_size_and_elements() {
     $this->assertVerified(Assertions::of([1, 2, 3])->isNotEqualTo(null)->hasSize(3)->contains(2));
   }

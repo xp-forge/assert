@@ -1,6 +1,7 @@
 <?php namespace unittest\assert\unittest;
 
 use unittest\assert\Assertions;
+use unittest\{Test, Values};
 
 /**
  * Tests `extracting()` method.
@@ -33,32 +34,32 @@ class ExtractingTest extends AbstractAssertionsTest {
     ];
   }
 
-  #[@test, @values('people')]
+  #[Test, Values('people')]
   public function extracting($person) {
     $this->assertVerified(Assertions::of($person)->extracting('name')->isEqualTo('Test'));
   }
 
-  #[@test, @values('people')]
+  #[Test, Values('people')]
   public function extracting_multiple($person) {
     $this->assertVerified(Assertions::of($person)->extracting(['name', 'age'])->isEqualTo(['Test', 42]));
   }
 
-  #[@test, @values('people')]
+  #[Test, Values('people')]
   public function extracting_by_name($person) {
     $this->assertVerified(Assertions::of($person)->extracting(['key' => 'id'])->isEqualTo(['key' => 1]));
   }
 
-  #[@test, @values('people')]
+  #[Test, Values('people')]
   public function extracting_chained($person) {
     $this->assertVerified(Assertions::of($person)->extracting('department')->extracting('name')->isEqualTo('Test'));
   }
 
-  #[@test, @values('people')]
+  #[Test, Values('people')]
   public function extracting_from_array($person) {
     $this->assertVerified(Assertions::of([$person, $person])->extracting('name')->isEqualTo(['Test', 'Test']));
   }
 
-  #[@test]
+  #[Test]
   public function extracting_from_instance_via_closure() {
     $this->assertVerified(Assertions::of(new Person(1, 'Test', 42, ['name' => 'Test']))
       ->extracting(function($person) { return $person->name(); })
@@ -66,7 +67,7 @@ class ExtractingTest extends AbstractAssertionsTest {
     );
   }
 
-  #[@test]
+  #[Test]
   public function extracting_from_map_via_closure() {
     $this->assertVerified(Assertions::of(['id' => 1, 'name' => 'Test'])
       ->extracting(function($person) { return $person['name']; })
@@ -74,7 +75,7 @@ class ExtractingTest extends AbstractAssertionsTest {
     );
   }
 
-  #[@test]
+  #[Test]
   public function extracting_from_map_via_array_of_string_and_closure() {
     $this->assertVerified(Assertions::of(['id' => 1, 'name' => 'Test'])
       ->extracting([function($person) { return $person['name']; }, 'id'])
