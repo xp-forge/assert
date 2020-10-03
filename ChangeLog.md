@@ -3,6 +3,13 @@ Assertions change log
 
 ## ?.?.? / ????-??-??
 
+## 4.1.0 / 2020-10-03
+
+* Fixed PHP 8 compatibility by renaming (the internally used) class
+  `unittest.assert.Match` class to *MatchUsing*. PHP 8 defines match as
+  a keyword, see https://wiki.php.net/rfc/match_expression_v2
+  (@thekid)
+
 ## 4.0.0 / 2020-04-10
 
 * Implemented xp-framework/rfc#334: Drop PHP 5.6:
