@@ -3,14 +3,14 @@
 class StringAssertions extends Assertions {
 
   public function hasSize($size) {
-    return $this->is(new Match(
+    return $this->is(new MatchUsing(
       function($value) use($size) { return strlen($value) === $size; },
       ['%s does not have a length of '.$size, '%s has a length of '.$size]
     ));
   }
 
   public function isEmpty() {
-    return $this->is(new Match(
+    return $this->is(new MatchUsing(
       function($value) { return 0 === strlen($value); },
       ['%s is not empty', '%s is empty']
     ));
@@ -18,7 +18,7 @@ class StringAssertions extends Assertions {
 
   public function startsWith($string) {
     $rep= Condition::stringOf($string);
-    return $this->is(new Match(
+    return $this->is(new MatchUsing(
       function($value) use($string) {
         return ('' !== $value && 0 === substr_compare($value, $string, 0, strlen($string)));
       },
@@ -28,7 +28,7 @@ class StringAssertions extends Assertions {
 
   public function endsWith($string) {
     $rep= Condition::stringOf($string);
-    return $this->is(new Match(
+    return $this->is(new MatchUsing(
       function($value) use($string) {
         return ('' !== $value && 0 === substr_compare($value, $string, -strlen($string)));
       },
@@ -38,7 +38,7 @@ class StringAssertions extends Assertions {
 
   public function contains($string) {
     $rep= Condition::stringOf($string);
-    return $this->is(new Match(
+    return $this->is(new MatchUsing(
       function($value) use($string) {
         return false !== strpos($value, $string);
       },
@@ -48,7 +48,7 @@ class StringAssertions extends Assertions {
 
   public function doesNotContain($string) {
     $rep= Condition::stringOf($string);
-    return $this->isNot(new Match(
+    return $this->isNot(new MatchUsing(
       function($value) use($string) {
         return false !== strpos($value, $string);
       },

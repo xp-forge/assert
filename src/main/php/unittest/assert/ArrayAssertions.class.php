@@ -5,14 +5,14 @@ use util\Objects;
 class ArrayAssertions extends Assertions {
 
   public function hasSize($size) {
-    return $this->is(new Match(
+    return $this->is(new MatchUsing(
       function($value) use($size) { return sizeof($value) === $size; },
       ['%s does not have a length of '.$size, '%s has a size of '.$size]
     ));
   }
 
   public function isEmpty() {
-    return $this->is(new Match(
+    return $this->is(new MatchUsing(
       function($value) { return empty($value); },
       ['%s is not empty', '%s is empty']
     ));
@@ -20,7 +20,7 @@ class ArrayAssertions extends Assertions {
 
   public function contains($element) {
     $rep= Condition::stringOf($element);
-    return $this->is(new Match(
+    return $this->is(new MatchUsing(
       function($value) use($element) {
         foreach ($value as $value) {
           if ($value === $element) return true;
@@ -33,7 +33,7 @@ class ArrayAssertions extends Assertions {
 
   public function doesNotContain($element) {
     $rep= Condition::stringOf($element);
-    return $this->isNot(new Match(
+    return $this->isNot(new MatchUsing(
       function($value) use($element) {
         foreach ($value as $value) {
           if ($value === $element) return true;
@@ -46,7 +46,7 @@ class ArrayAssertions extends Assertions {
 
   public function startsWith($element) {
     $rep= Condition::stringOf($element);
-    return $this->is(new Match(
+    return $this->is(new MatchUsing(
       function($value) use($element) {
         return sizeof($value) > 0 && Objects::equal($value[0], $element);
       },
@@ -56,7 +56,7 @@ class ArrayAssertions extends Assertions {
 
   public function endsWith($element) {
     $rep= Condition::stringOf($element);
-    return $this->is(new Match(
+    return $this->is(new MatchUsing(
       function($value) use($element) {
         return sizeof($value) > 0 && Objects::equal($value[sizeof($value) - 1], $element);
       },

@@ -2,7 +2,7 @@
 
 use lang\Type;
 
-class Match extends Condition {
+class MatchUsing extends Condition {
   protected static $PREDICATE;
   protected $function;
   protected $format;
