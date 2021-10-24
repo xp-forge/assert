@@ -3,6 +3,10 @@ Assertions change log
 
 ## ?.?.? / ????-??-??
 
+## 4.1.1 / 2021-10-25
+
+* Made library compatible with XP 11 - @thekid
+
 ## 4.1.0 / 2020-10-03
 
 * Fixed PHP 8 compatibility by renaming (the internally used) class
