@@ -5,6 +5,7 @@ use unittest\{AssertionFailedError, FormattedMessage};
 use util\Objects;
 
 abstract class AbstractAssertionsTest extends \unittest\TestCase {
+  private $failed;
 
   public function setUp() {
     $this->failed= Assertions::enter(new AssertionsFailed());
